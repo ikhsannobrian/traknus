@@ -11,6 +11,14 @@ if (isset($_POST["simpan"])) {
   $status = $_POST["status"];
   $image = $_POST["image"];
 
+
+
+
+
+
+
+
+  
   mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status','$image')");
 }
 ?>
