@@ -8,10 +8,10 @@ if (isset($_POST["simpan"])) {
   $kebutuhan = $_POST["kebutuhan"];
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
-  $status = $_POST["status"];
-  $image = $_POST["image"];
+  // $status = $_POST["status"];
+  // $image = $_POST["image"];
 
-  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status','$image')");
+  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','','')");
 }
 ?>
 
