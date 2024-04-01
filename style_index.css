@@ -1,0 +1,32 @@
+body {
+  font-family: "poppins", "sans-serif";
+  background-image: url(image/gedung\ traknus.jpg);
+}
+/* navbar style */
+.nav-link {
+  font-size: 16px;
+}
+
+/* .button-primary {
+  font-weight: 400;
+  width: 133px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+} */
+/* Hero section */
+.hero-tagline h1 {
+  color: #1e0f6b;
+  margin-top: 280px;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 72px;
+}
+.hero-tagline p {
+  font-weight: 500;
+  color: #000;
+  font-size: 16px;
+  line-height: 30px;
+  width: 80%;
+}
