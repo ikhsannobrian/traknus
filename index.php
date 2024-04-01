@@ -26,6 +26,7 @@ include "config.php";
 
 <body>
   <!-- start navbar -->
+  <h1>COBA PUSH TEST</h1>
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <div class="container">
       <a class="navbar-brand" href="#">
