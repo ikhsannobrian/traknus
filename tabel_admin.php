@@ -41,7 +41,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
           <li class="nav-item mx-2"></li>
         </ul>
         <div>
-          <a href="login_teknisi.html" class="btn btn-primary">Log Out</a>
+          <a href="halaman_admin.html" class="btn btn-primary">Home</a>
         </div>
       </div>
     </div>
@@ -79,8 +79,8 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
               <td><?php echo $row_pengaduan["penjelasan"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td>
-                <a href="updateteknisi.php?update=<?php echo $row_pengaduan["id"] ?>" class="btn btn-primary mb-2">Update</a>
-                <a href="image/<?php echo $row_pengaduan["image"] ?>" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
+                <a href="" class="btn btn-danger">Delete</a>
+                <a href="" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
               </td>
             </tr>
           <?php $no++;

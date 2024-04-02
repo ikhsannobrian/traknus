@@ -10,7 +10,6 @@ if (isset($_POST["simpan"])) {
     $penjelasan = $_POST["penjelasan"];
     $status = $_POST["status"];
     // $image = $_POST["image"];
-
     mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status ','')");
 }
  **/
@@ -21,21 +20,13 @@ if (isset($_POST["ubah"])) {
     mysqli_query($conn, "UPDATE pengaduan SET status ='$status' WHERE id='$_id'");
     header("location:tabel_teknisi.php");
 }
-
-
-
 /** Tampil Data Pada Form **/
 $id = $_GET["update"];
 $edit = mysqli_query($conn, "SELECT * FROM pengaduan WHERE id ='$id'");
 if (mysqli_num_rows($edit) == 0) header("location:updateteknisi.php");
 $row_edit = mysqli_fetch_array($edit);
-
-
-
-
 /**Tampil data**/
 $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
-
 ?>
 
 <!DOCTYPE html>
@@ -93,28 +84,6 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
                     </div>
                     <!-- Start Form -->
                     <form method="post">
-                        <!-- 
-                        <label for="">Nama</label>
-                        <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" value="<?php echo $row_edit["nama"] ?>" />
-                        </div>
-                        <label for="">Departemen</label>
-                        <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan departemen anda" name="departemen" value="<?php echo $row_edit["departemen"] ?>" />
-                        </div>
-                        <label for="">Kebutuhan</label>
-                        <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan keperluan anda (Repair/Maintenance)" name="kebutuhan" value="<?php echo $row_edit["kebutuhan"] ?>" />
-                        </div>
-                        <label for="">Tanggal</label>
-                        <div>
-                            <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tanggal" value="<?php echo $row_edit["tanggal"] ?>" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Penjelasan</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan diperbaiki/maintenance" name="penjelasan" value="<?php echo $row_edit["penjelasan"] ?>"></textarea>
-                        </div>
-                         -->
                         <label for="">Status</label>
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>>
@@ -125,7 +94,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
                         </div>
                         <div class="mb-3">
                             <label for="">Bukti</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple name="image" >
+                            <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
                         <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">
