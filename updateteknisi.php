@@ -22,6 +22,8 @@ if (isset($_POST["ubah"])) {
     header("location:tabel_teknisi.php");
 }
 
+
+
 /** Tampil Data Pada Form **/
 $id = $_GET["update"];
 $edit = mysqli_query($conn, "SELECT * FROM pengaduan WHERE id ='$id'");

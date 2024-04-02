@@ -112,6 +112,8 @@ if (isset($_POST["simpan"])) {
             </div>
               -->
 
+
+              
             <!-- <div class="mb-3">
               <label for="">Bukti</label>
               <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
