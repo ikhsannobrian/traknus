@@ -8,13 +8,11 @@ if (isset($_POST["simpan"])) {
   $kebutuhan = $_POST["kebutuhan"];
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
-  $status = $_POST["status"];
-  $image = $_POST["image"];
+  //$status = $_POST["status"];
+  // $image = $_POST["image"];
 
-  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status','$image')");
+  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status ','')");
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -103,6 +101,7 @@ if (isset($_POST["simpan"])) {
               <label for="exampleFormControlTextarea1" class="form-label">Penjelasan</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan diperbaiki/maintenance" name="penjelasan"></textarea>
             </div>
+            <!--
             <label for="">Status</label>
             <div class="mb-3">
               <select class="form-select" aria-label="Default select example" name="status">
@@ -111,11 +110,13 @@ if (isset($_POST["simpan"])) {
                 <option value="Sudah dikerjakan">Sudah dikerjakan</option>
               </select>
             </div>
-            <div class="mb-3">
+              -->
+
+            <!-- <div class="mb-3">
               <label for="">Bukti</label>
               <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
-              <p style="color: red;">*Kosongkan jika belum dikerjakan</p>
-            </div>
+              <p style="color: red;">Kosongkan jika belum dikerjakan</p>
+            </div> -->
             <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="simpan">Simpan</button>
           </form>
           <!-- End Form -->
