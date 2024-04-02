@@ -79,7 +79,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
               <td><?php echo $row_pengaduan["penjelasan"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td>
-                <a href="update_teknisi.php?update=<?php echo $row_pengaduan["id"] ?>" class="btn btn-primary">Update</a>
+                <a href="" class="btn btn-primary">Update</a>
                 <a href="image/<?php echo $row_pengaduan["image"] ?>" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
               </td>
             </tr>

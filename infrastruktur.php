@@ -8,11 +8,13 @@ if (isset($_POST["simpan"])) {
   $kebutuhan = $_POST["kebutuhan"];
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
-  // $status = $_POST["status"];
-  // $image = $_POST["image"];
+  $status = $_POST["status"];
+  $image = $_POST["image"];
 
-  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','','')");
+  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status','$image')");
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +73,7 @@ if (isset($_POST["simpan"])) {
             <p class="text-secondary">Maintenance & Repair</p>
           </div>
           <!-- Start Form -->
-          <form action="#" method="post">
+          <form method="post">
             <label for="">Nama</label>
             <div class="input-group mb-3">
               <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" />
@@ -100,6 +102,19 @@ if (isset($_POST["simpan"])) {
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Penjelasan</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan diperbaiki/maintenance" name="penjelasan"></textarea>
+            </div>
+            <label for="">Status</label>
+            <div class="mb-3">
+              <select class="form-select" aria-label="Default select example" name="status">
+                <option value=""></option>
+                <option value="Belum dikerjakan">Belum dikerjakan</option>
+                <option value="Sudah dikerjakan">Sudah dikerjakan</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="">Bukti</label>
+              <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
+              <p style="color: red;">*Kosongkan jika belum dikerjakan</p>
             </div>
             <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="simpan">Simpan</button>
           </form>
