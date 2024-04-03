@@ -89,7 +89,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
                             <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>>
                                 <option value=""></option>
                                 <option value=" Belum dikerjakan" <?php if ($row_edit['status'] == 'Belum dikerjakan') echo 'selected' ?>>Belum dikerjakan</option>
-                                <option value="Sudah dikerj  akan" <?php if ($row_edit['status'] == 'Sudah dikerjakan') echo 'selected' ?>>Sudah dikerjakan</option>
+                                <option value="Sudah dikerjakan" <?php if ($row_edit['status'] == 'Sudah dikerjakan') echo 'selected' ?>>Sudah dikerjakan</option>
                             </select>
                         </div>
                         <div class="mb-3">
