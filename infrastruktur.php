@@ -74,7 +74,7 @@ if (isset($_POST["simpan"])) {
           <form method="post">
             <label for="">Nama</label>
             <div class="input-group mb-3">
-              <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" />
+              <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" required />
             </div>
             <label for="">Departemen</label>
             <div class="input-group mb-3">
@@ -138,9 +138,6 @@ if (isset($_POST["simpan"])) {
               </select>
             </div>
               -->
-
-
-
             <!-- <div class="mb-3">
               <label for="">Bukti</label>
               <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
