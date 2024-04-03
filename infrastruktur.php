@@ -11,7 +11,7 @@ if (isset($_POST["simpan"])) {
   //$status = $_POST["status"];
   // $image = $_POST["image"];
 
-  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status ','')");
+  mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','','')");
 }
 ?>
 
@@ -51,7 +51,7 @@ if (isset($_POST["simpan"])) {
           </li>
         </ul>
         <div>
-          <a href="login_teknisi.html" class="btn btn-primary">Teknisi</a>
+          <a href="login_teknisi.php" class="btn btn-primary">Teknisi</a>
         </div>
       </div>
     </div>
@@ -83,6 +83,33 @@ if (isset($_POST["simpan"])) {
                 <option value="General Affair">General Affair</option>
                 <option value="Material Handling">Material Handling</option>
                 <option value="Marketing Communication">Marketing Communication</option>
+                <option value="Project Management 1">Project Management 1</option>
+                <option value="Material Handling Parts">Material Handling Parts</option>
+                <option value="Material Handling Service">Material Handling Service</option>
+                <option value="Material Handling Technical Suport">Material Handling Technical Suport</option>
+                <option value="Service Personnel Development & Facilities">Service Personnel Development & Facilities</option>
+                <option value="Business Development & Japan Desk">Business Development & Japan Desk</option>
+                <option value="Power Generation Sales Group 1">Power Generation Sales Group 1</option>
+                <option value="Power Generation Sales Group 2">Power Generation Sales Group 2</option>
+                <option value="Air Solution Sales">Air Solution Sales</option>
+                <option value="Agro Sales">Agro Sales</option>
+                <option value="Construction & Crane Sales">Construction & Crane Sales</option>
+                <option value="Product Management 2">Product Management 2</option>
+                <option value="Product Management 3">Product Management 3</option>
+                <option value="Application Engineering">Application Engineering</option>
+                <option value="Marketing Support & Importation">Marketing Support & Importation</option>
+                <option value="Parts Marketing">Parts Marketing</option>
+                <option value="Parts Sales & Key Account">Parts Sales & Key Account</option>
+                <option value="Parts Logistic & Warehouse">Parts Logistic & Warehouse</option>
+                <option value="Service Business & Marketing">Service Business & Marketing</option>
+                <option value="Service Technical Support">Service Technical Support</option>
+                <option value="Human Capital Development (HCD)">Human Capital Development (HCD)</option>
+                <option value="Human Capital Services (HCS)">Human Capital Services (HCS)</option>
+                <option value="Accounting & Taxes">Accounting & Taxes</option>
+                <option value="Sustainability, Security, Environment, Health, and Safety (SSEHS)">Sustainability, Security, Environment, Health, and Safety (SSEHS)</option>
+                <option value="Budget & Control">Budget & Control</option>
+                <option value="Finance & PDCA">Finance & PDCA</option>
+                <option value="Information Technology (IT)">Information Technology (IT)</option>
               </select>
             </div>
             <label for="">Kebutuhan</label>
@@ -113,7 +140,7 @@ if (isset($_POST["simpan"])) {
               -->
 
 
-              
+
             <!-- <div class="mb-3">
               <label for="">Bukti</label>
               <input class="form-control" type="file" id="formFileMultiple" multiple name="image">

@@ -18,7 +18,7 @@ include "config.php";
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet" />
   <!-- My style -->
-  <link rel="stylesheet" href="style_index.css" />
+  <link rel="stylesheet" href="style.css" />
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <title>General Affair</title>
@@ -48,7 +48,7 @@ include "config.php";
           </li>
         </ul>
         <div>
-          <a href="login_admin.html" class="btn btn-primary">Admin</a>
+          <a href="login_admin.php" class="btn btn-primary">Admin</a>
         </div>
       </div>
     </div>
