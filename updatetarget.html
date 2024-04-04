@@ -1,34 +1,3 @@
-<?php
-ob_start();
-include "config.php";
-/**Input Data
-if (isset($_POST["simpan"])) {
-    $nama = $_POST["nama"];
-    $departemen = $_POST["departemen"];
-    $kebutuhan = $_POST["kebutuhan"];
-    $tanggal = $_POST["tanggal"];
-    $penjelasan = $_POST["penjelasan"];
-    $status = $_POST["status"];
-    // $image = $_POST["image"];
-    mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status ','')");
-}
- **/
-/** Proses Update Data **/
-if (isset($_POST["ubah"])) {
-    $_id = $_POST["id"];
-    $status = $_POST["status"];
-    mysqli_query($conn, "UPDATE pengaduan SET status ='$status' WHERE id='$_id'");
-    header("location:tabel_teknisi.php");
-}
-/** Tampil Data Pada Form **/
-$id = $_GET["update"];
-$edit = mysqli_query($conn, "SELECT * FROM pengaduan WHERE id ='$id'");
-if (mysqli_num_rows($edit) == 0) header("location:updateteknisi.php");
-$row_edit = mysqli_fetch_array($edit);
-/**Tampil data**/
-$pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +16,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
     <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
     <!-- My style -->
     <link rel="stylesheet" href="style_infra.css" />
-    <title>Update pengaduan</title>
+    <title>Update Target</title>
 </head>
 
 <body>
@@ -86,23 +55,27 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
                     <form method="post">
                         <label for="">Status</label>
                         <div class="mb-3">
-                            <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>">
+                            <select class="form-select" aria-label="Default select example" name="status" value="">
                                 <option value=""></option>
-                                <option value=" Belum dikerjakan" <?php if ($row_edit['status'] == 'Belum dikerjakan') echo 'selected' ?>>Belum dikerjakan</option>
-                                <option value="Sudah dikerjakan" <?php if ($row_edit['status'] == 'Sudah dikerjakan') echo 'selected' ?>>Sudah dikerjakan</option>
+                                <option value=" Belum Selesai" >Belum Selesai</option>
+                                <option value="Sudah Selesai" >Sudah Selesai</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="">Bukti</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
-                        </div>
+                        <label for="">Tanggal Berakhir</label>
+                             <div>
+                                <input
+                                 type="date"
+                                 class="form-control form-control-lg fs-6 mb-3"
+                                name="tgl_akhir"
+                                />
+                                </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
-                        <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">
+                        <input type="hidden" name="id" value="">
                     </form>
                     <!-- End Form -->
                     <div class="text-center">
-                        <small>Apakah ingin kembali?
-                            <a href="tabel_teknisi.php" class="fw-bold">Table</a></small>
+                        <small>Apakah ingin ke?
+                            <a href="tabel_target.html" class="fw-bold">Tabel</a></small>
                     </div>
                 </div>
             </div>
@@ -119,7 +92,3 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
 </body>
 
 </html>
-<?php
-mysqli_close($conn);
-ob_end_flush();
-?>

@@ -41,7 +41,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
           <li class="nav-item mx-2"></li>
         </ul>
         <div>
-          <a href="login_teknisi.html" class="btn btn-primary">Log Out</a>
+          <a href="login_teknisi.php" class="btn btn-primary">Log Out</a>
         </div>
       </div>
     </div>
