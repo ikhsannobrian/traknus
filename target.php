@@ -133,7 +133,7 @@
             <div class="text-center">
               <small
                 >Apakah ingin ke?
-                <a href="tabel_target.html" class="fw-bold">Tabel</a></small
+                <a href="tabel_target.php" class="fw-bold">Tabel</a></small
               >
             </div>
           </div>

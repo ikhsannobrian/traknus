@@ -1,3 +1,11 @@
+<?php
+ob_start();
+include "config.php";
+
+//**Tampil Data**/ 
+$target = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +13,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <!-- box icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <!-- Font Google -->
@@ -16,7 +25,7 @@
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
   <link rel="stylesheet" href="style_infra.css" />
-  <title>Admin</title>
+  <title>Daftar Target</title>
 </head>
 
 <body>
@@ -31,17 +40,57 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
-            <a class="nav-link" aria-current="page" href="tabel_admin.php">Infrastruktur</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" aria-current="page" href="target.php">target</a>
+            <a class="nav-link" aria-current="page" href="target.html">Form</a>
           </li>
         </ul>
+        <div>
+          <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+        </div>
       </div>
     </div>
   </nav>
   <!-- End Navbar -->
+  <!-- Start Filter -->
+  <!-- Filter Tanggal -->
+
+  <!-- End Filter -->
+  <!-- Start Table -->
+  <div class="table-responsive">
+    <table class="table table-striped mt-2 text-center">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Nama Target</th>
+          <th>Periode</th>
+          <th>Tanggal Mulai</th>
+          <th>Tanggal Berakhir</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (mysqli_num_rows($target)) { ?>
+          <?php $no = 1 ?>
+          <?php while ($row_target = mysqli_fetch_array($target)) { ?>
+            <tr>
+              <td><?php echo $no ?></td>
+              <td><?php echo $row_target["nama_target"] ?></td>
+              <td><?php echo $row_target["periode"] ?></td>
+              <td><?php echo $row_target["tgl_mulai"] ?></td>
+              <td><?php echo $row_target["tgl_akhir"] ?></td>
+              <td><?php echo $row_target["status"] ?></td>
+              <td>
+                <a href="updatetarget.php?update=<?php echo $row_target["id"] ?>" class="btn btn-primary mb-2">Update</a>
+                <a href="" class="btn btn-danger">Delete</a>
+              </td>
+            </tr>
+          <?php $no++;
+          } ?>
+        <?php } ?>
+      </tbody>
+    </table>
   </div>
+  <!-- End Table -->
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
@@ -53,3 +102,7 @@
 </body>
 
 </html>
+<?php
+mysqli_close($conn);
+ob_end_flush();
+?>
