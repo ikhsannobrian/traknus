@@ -48,8 +48,8 @@
                     </a>
                     <!-- End Logo -->
                     <div class="text-center">
-                        <h3 class="fw-bold">Form Update Teknisi</h3>
-                        <p class="text-secondary">Maintenance & Repair</p>
+                        <h3 class="fw-bold">Form Update Target</h3>
+                        <p class="text-secondary">Update Our Target</p>
                     </div>
                     <!-- Start Form -->
                     <form method="post">
@@ -57,25 +57,21 @@
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status" value="">
                                 <option value=""></option>
-                                <option value=" Belum Selesai" >Belum Selesai</option>
-                                <option value="Sudah Selesai" >Sudah Selesai</option>
+                                <option value=" Belum Selesai">Belum Selesai</option>
+                                <option value="Sudah Selesai">Sudah Selesai</option>
                             </select>
                         </div>
                         <label for="">Tanggal Berakhir</label>
-                             <div>
-                                <input
-                                 type="date"
-                                 class="form-control form-control-lg fs-6 mb-3"
-                                name="tgl_akhir"
-                                />
-                                </div>
+                        <div>
+                            <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tgl_akhir" />
+                        </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
                         <input type="hidden" name="id" value="">
                     </form>
                     <!-- End Form -->
                     <div class="text-center">
                         <small>Apakah ingin ke?
-                            <a href="tabel_target.html" class="fw-bold">Tabel</a></small>
+                            <a href="tabel_target.php" class="fw-bold">Tabel</a></small>
                     </div>
                 </div>
             </div>

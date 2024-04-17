@@ -40,7 +40,7 @@ $target = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
-            <a class="nav-link" aria-current="page" href="target.html">Form</a>
+            <a class="nav-link" aria-current="page" href="target.php">Form</a>
           </li>
         </ul>
         <div>
