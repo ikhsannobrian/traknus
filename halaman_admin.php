@@ -38,6 +38,9 @@
           </li>
         </ul>
       </div>
+      <div>
+        <a href="login_admin.php" class="btn btn-primary">Log Out</a>
+      </div>
     </div>
   </nav>
   <!-- End Navbar -->

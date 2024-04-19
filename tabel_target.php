@@ -80,8 +80,8 @@ $target = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
               <td><?php echo $row_target["tgl_akhir"] ?></td>
               <td><?php echo $row_target["status"] ?></td>
               <td>
-                <a href="updatetarget.php?update=<?php echo $row_target["id"] ?>" class="btn btn-primary mb-2">Update</a>
-                <a href="" class="btn btn-danger">Delete</a>
+                <a href="updatetarget.php?update=<?php echo $row_target["id"] ?>" class="btn btn-primary">Update</a>
+                <a href="deletetarget.php?delete=<?php echo $row_target["id"] ?>" class="btn btn-danger">Delete</a>
               </td>
             </tr>
           <?php $no++;

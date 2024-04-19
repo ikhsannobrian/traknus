@@ -17,7 +17,8 @@ if (isset($_POST["simpan"])) {
 if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
     $status = $_POST["status"];
-    mysqli_query($conn, "UPDATE pengaduan SET status ='$status' WHERE id='$_id'");
+    $image = $_POST["image"];
+    mysqli_query($conn, "UPDATE pengaduan SET status ='$status', image='$image' WHERE id='$_id'");
     header("location:tabel_teknisi.php");
 }
 /** Tampil Data Pada Form **/
@@ -94,7 +95,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
                         </div>
                         <div class="mb-3">
                             <label for="">Bukti</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
+                            <input class="form-control" type="file" id="formFileMultiple" multiple name="image" value="<?php echo $row_edit["image"] ?>">
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
                         <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">

@@ -1,3 +1,23 @@
+<?php
+ob_start();
+include "config.php";
+/** Proses Update Data**/
+if (isset($_POST["ubah"])) {
+    $_id = $_POST["id"];
+    $status = $_POST["status"];
+    $tgl_akhir = $_POST["tgl_akhir"];
+    mysqli_query($conn, "UPDATE target_ga SET tgl_akhir='$tgl_akhir', status='$status' WHERE id='$_id'");
+    header("location:tabel_target.php");
+}
+/** Proses Ambil Data **/
+$id = $_GET["update"];
+$edit = mysqli_query($conn, "SELECT * FROM target_ga WHERE id ='$id' ");
+if (mysqli_num_rows($edit) == 0) header("location:updatetarget.php");
+$row_edit = mysqli_fetch_array($edit);
+/**Tampil data**/
+$pengaduan = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,18 +75,18 @@
                     <form method="post">
                         <label for="">Status</label>
                         <div class="mb-3">
-                            <select class="form-select" aria-label="Default select example" name="status" value="">
+                            <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>">
                                 <option value=""></option>
-                                <option value=" Belum Selesai">Belum Selesai</option>
-                                <option value="Sudah Selesai">Sudah Selesai</option>
+                                <option value="Belum Selesai" <?php if ($row_edit['status'] == 'Belum Selesai') echo 'selected' ?>>Belum Selesai</option>
+                                <option value="Sudah Selesai" <?php if ($row_edit['status'] == 'Sudah Selesai') echo 'selected' ?>>Sudah Selesai</option>
                             </select>
                         </div>
                         <label for="">Tanggal Berakhir</label>
                         <div>
-                            <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tgl_akhir" />
+                            <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tgl_akhir" value="<?php echo $row_edit["tgl_akhir"] ?>" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
-                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">
                     </form>
                     <!-- End Form -->
                     <div class="text-center">
@@ -88,3 +108,7 @@
 </body>
 
 </html>
+<?php
+mysqli_close($conn);
+ob_end_flush();
+?>
