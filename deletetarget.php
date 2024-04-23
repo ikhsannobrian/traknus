@@ -2,7 +2,7 @@
 include "config.php";
 if (isset($_GET["delete"])) {
     $id = $_GET["delete"];
-    $hapus = mysqli_query($conn, "DELETE FROM target_ga WHERE id='$id'");
+    $hapus = mysqli_query($conn, "DELETE FROM ga_target WHERE id='$id'");
     if ($hapus) {
         echo "<script>
                     alert('data anda telah dihapus!');

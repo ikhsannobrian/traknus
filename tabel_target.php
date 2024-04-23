@@ -3,7 +3,7 @@ ob_start();
 include "config.php";
 
 //**Tampil Data**/ 
-$target = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
+$target = mysqli_query($conn, "SELECT * FROM ga_target ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>

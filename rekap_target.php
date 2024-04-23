@@ -1,8 +1,5 @@
 <?php
 include "config.php";
-$query = mysqli_query($conn, "SELECT * FROM target_ga");
-
-$query1 = mysqli_query($conn, "SELECT * FROM ")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,9 +58,9 @@ $query1 = mysqli_query($conn, "SELECT * FROM ")
                 </tr>
             </thead>
             <tbody>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>Sudah dikerjakan</td>
+                <td>3</td>
             </tbody>
         </table>
     </div>

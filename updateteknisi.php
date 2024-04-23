@@ -19,16 +19,16 @@ if (isset($_POST["ubah"])) {
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
     $image = $_POST["image"];
-    mysqli_query($conn, "UPDATE pengaduan SET status ='$status', image='$image', pekerja = '$pekerja' WHERE id ='$_id'");
+    mysqli_query($conn, "UPDATE laporan SET status ='$status', image='$image', pekerja = '$pekerja' WHERE id ='$_id'");
     header("location:tabel_teknisi.php");
 }
 /** Tampil Data Pada Form **/
 $id = $_GET["update"];
-$edit = mysqli_query($conn, "SELECT * FROM pengaduan WHERE id ='$id'");
+$edit = mysqli_query($conn, "SELECT * FROM laporan WHERE id ='$id'");
 if (mysqli_num_rows($edit) == 0) header("location:updateteknisi.php");
 $row_edit = mysqli_fetch_array($edit);
 /**Tampil data**/
-$pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
+$pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>

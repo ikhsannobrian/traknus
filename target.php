@@ -6,7 +6,7 @@ if (isset($_POST["simpan"])) {
   $nama_target = $_POST["nama_target"];
   $periode = $_POST["periode"];
   $tgl_mulai = $_POST["tgl_mulai"];
-  mysqli_query($conn, "INSERT INTO target_ga VALUES('','$nama_target','$periode','$tgl_mulai','','')");
+  mysqli_query($conn, "INSERT INTO ga_target VALUES('','$nama_target','$periode','$tgl_mulai','','')");
 }
 ?>
 

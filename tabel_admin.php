@@ -3,7 +3,7 @@ ob_start();
 include "config.php";
 
 /**Tampil data**/
-$pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
+$pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">

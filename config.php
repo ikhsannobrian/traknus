@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "general_affair";
+$dbname = "db_ga";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {

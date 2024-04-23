@@ -6,16 +6,16 @@ if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
     $status = $_POST["status"];
     $tgl_akhir = $_POST["tgl_akhir"];
-    mysqli_query($conn, "UPDATE target_ga SET tgl_akhir='$tgl_akhir', status='$status' WHERE id='$_id'");
+    mysqli_query($conn, "UPDATE ga_target SET tgl_akhir='$tgl_akhir', status='$status' WHERE id='$_id'");
     header("location:tabel_target.php");
 }
 /** Proses Ambil Data **/
 $id = $_GET["update"];
-$edit = mysqli_query($conn, "SELECT * FROM target_ga WHERE id ='$id' ");
+$edit = mysqli_query($conn, "SELECT * FROM ga_target WHERE id ='$id' ");
 if (mysqli_num_rows($edit) == 0) header("location:updatetarget.php");
 $row_edit = mysqli_fetch_array($edit);
 /**Tampil data**/
-$pengaduan = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
+$pengaduan = mysqli_query($conn, "SELECT * FROM ga_target ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
