@@ -42,6 +42,9 @@ $target = mysqli_query($conn, "SELECT * FROM target_ga ORDER BY id DESC");
           <li class="nav-item mx-2">
             <a class="nav-link" aria-current="page" href="target.php">Form</a>
           </li>
+          <li>
+            <a class="nav-link" aria-current="page" href="rekap_target.php">Recap</a>
+          </li>
         </ul>
         <div>
           <a href="halaman_admin.php" class="btn btn-primary">Home</a>

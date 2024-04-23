@@ -63,6 +63,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
           <th>Tanggal</th>
           <th>Penjelasan</th>
           <th>Status</th>
+          <th>Pekerja</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -78,6 +79,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
               <td><?php echo $row_pengaduan["tanggal"] ?></td>
               <td><?php echo $row_pengaduan["penjelasan"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
+              <td><?php echo $row_pengaduan["pekerja"] ?></td>
               <td>
                 <a href="deletepengaduan.php?delete=<?php echo $row_pengaduan["id"] ?>" class="btn btn-danger">Delete</a>
                 <a href="" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>

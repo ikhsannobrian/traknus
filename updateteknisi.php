@@ -10,15 +10,16 @@ if (isset($_POST["simpan"])) {
     $penjelasan = $_POST["penjelasan"];
     $status = $_POST["status"];
     // $image = $_POST["image"];
-    mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status ','')");
+    mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status','')");
 }
  **/
 /** Proses Update Data **/
 if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
     $status = $_POST["status"];
+    $pekerja = $_POST["pekerja"];
     $image = $_POST["image"];
-    mysqli_query($conn, "UPDATE pengaduan SET status ='$status', image='$image' WHERE id='$_id'");
+    mysqli_query($conn, "UPDATE pengaduan SET status ='$status', image='$image', pekerja = '$pekerja' WHERE id ='$_id'");
     header("location:tabel_teknisi.php");
 }
 /** Tampil Data Pada Form **/
@@ -85,6 +86,10 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM pengaduan ORDER BY id DESC");
                     </div>
                     <!-- Start Form -->
                     <form method="post">
+                        <label for="">Nama</label>
+                        <div class="input-group mb-3">
+                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" required />
+                        </div>
                         <label for="">Status</label>
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>">
