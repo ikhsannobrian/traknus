@@ -1,5 +1,13 @@
 <?php
 include "config.php";
+$query = mysqli_query($conn, "SELECT * FROM ga_target");
+
+$query1 = mysqli_query($conn, "SELECT * FROM ga_target WHERE status ='Sedang Dikerjakan'");
+$count1 = mysqli_num_rows($query1);
+$query2 = mysqli_query($conn, "SELECT * FROM ga_target WHERE status ='Belum Dimulai'");
+$count2 = mysqli_num_rows($query2);
+$query3 = mysqli_query($conn, "SELECT * FROM ga_target WHERE status ='Sudah Selesai'");
+$count3 = mysqli_num_rows($query3);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,9 +66,22 @@ include "config.php";
                 </tr>
             </thead>
             <tbody>
-                <td>1</td>
-                <td>Sudah dikerjakan</td>
-                <td>3</td>
+                <tr>
+                    <td>1</td>
+                    <td>Sedang Dikerjakan</td>
+                    <td><?= $count1 ?></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Belum Dimulai</td>
+                    <td><?= $count2 ?></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Sudah Selesai</td>
+                    <td><?= $count3 ?></td>
+                </tr>
+                <tr>
             </tbody>
         </table>
     </div>

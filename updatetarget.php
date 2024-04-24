@@ -77,7 +77,8 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM ga_target ORDER BY id DESC");
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>">
                                 <option value=""></option>
-                                <option value="Belum Selesai" <?php if ($row_edit['status'] == 'Belum Selesai') echo 'selected' ?>>Belum Selesai</option>
+                                <option value="Belum Dimulai" <?php if ($row_edit['status'] == 'Belum Dimulai') echo 'selected' ?>>Belum Dimulai</option>
+                                <option value="Sedang Dikerjakan" <?php if ($row_edit['status'] == 'Sedang Dikerjakan') echo 'selected' ?>>Sedang Dikerjakan</option>
                                 <option value="Sudah Selesai" <?php if ($row_edit['status'] == 'Sudah Selesai') echo 'selected' ?>>Sudah Selesai</option>
                             </select>
                         </div>

@@ -6,7 +6,8 @@ if (isset($_POST["simpan"])) {
   $nama_target = $_POST["nama_target"];
   $periode = $_POST["periode"];
   $tgl_mulai = $_POST["tgl_mulai"];
-  mysqli_query($conn, "INSERT INTO ga_target VALUES('','$nama_target','$periode','$tgl_mulai','','')");
+  $penjelasan = $_POST["penjelasan"];
+  mysqli_query($conn, "INSERT INTO ga_target VALUES('','$nama_target','$periode','$tgl_mulai','$penjelasan','','')");
 }
 ?>
 
@@ -78,7 +79,7 @@ if (isset($_POST["simpan"])) {
             </div>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Penjelasan</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan dilakukan didalam target" name="target"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan dilakukan didalam target" name="penjelasan"></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="simpan">
               Simpan

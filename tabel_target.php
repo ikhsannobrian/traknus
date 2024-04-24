@@ -66,6 +66,7 @@ $target = mysqli_query($conn, "SELECT * FROM ga_target ORDER BY id DESC");
           <th>Nama Target</th>
           <th>Periode</th>
           <th>Tanggal Mulai</th>
+          <th>Keterangan</th>
           <th>Tanggal Berakhir</th>
           <th>Status</th>
           <th>Aksi</th>
@@ -80,6 +81,7 @@ $target = mysqli_query($conn, "SELECT * FROM ga_target ORDER BY id DESC");
               <td><?php echo $row_target["nama_target"] ?></td>
               <td><?php echo $row_target["periode"] ?></td>
               <td><?php echo $row_target["tgl_mulai"] ?></td>
+              <td><?php echo $row_target["penjelasan"] ?></td>
               <td><?php echo $row_target["tgl_akhir"] ?></td>
               <td><?php echo $row_target["status"] ?></td>
               <td>
