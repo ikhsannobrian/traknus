@@ -29,22 +29,72 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
+        <!-- 
+           <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
             <a class="nav-link" aria-current="page" href="tabel_admin.php">Infrastruktur</a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link" aria-current="page" href="target.php">target</a>
           </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" aria-current="page" href="akun.php">Akun</a>
+          </li>
         </ul>
+         -->
+
       </div>
       <div>
         <a href="login_admin.php" class="btn btn-primary">Log Out</a>
       </div>
     </div>
   </nav>
-  <!-- End Navbar -->
   </div>
+  <!-- End Navbar -->
+  <!-- Start Card -->
+  <div class="container-fluid bg-light features">
+    <div class="container">
+      <div class="row pt-5">
+        <div class="col-md-12 text-center">
+          <h1>Our Features</h1>
+          <p>A Tribute Those Who Served as Executive Secretary and <br> Treasurer for the American Finance Association</p>
+        </div>
+      </div>
+      <div class="row py-4">
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="image/gedung traknus.jpg" class="img-fluid" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Infrastruktur</h5>
+              <p class="card-text">Checks the report</p>
+              <a href="tabel_admin.php" class="btn btn-info">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="image/gedung traknus.jpg" class="img-fluid" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Target</h5>
+              <p class="card-text">Makes some targets to achieve it </p>
+              <a href="target.php" class="btn btn-info">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="image/gedung traknus.jpg" class="img-fluid" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Account</h5>
+              <p class="card-text">Create, handle, & maintain our account</p>
+              <a href="akun_admin.php" class="btn btn-info">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Card -->
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
