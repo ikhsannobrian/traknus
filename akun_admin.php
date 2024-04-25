@@ -50,6 +50,24 @@
         </div>
     </nav>
     <!-- End Navbar -->
+    <!-- Start Table -->
+    <div class="table-responsive">
+        <table class="table table-striped mt-2 text-center">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td>1</td>
+                <td>admin1</td>
+                <td>123456</td>
+            </tbody>
+        </table>
+    </div>
+    <!-- End Table -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
