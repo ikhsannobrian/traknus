@@ -87,7 +87,7 @@
             <div class="card-body">
               <h5 class="card-title">Account</h5>
               <p class="card-text">Create, handle, & maintain our account</p>
-              <a href="akun_admin.php" class="btn btn-info">Selengkapnya</a>
+              <a href="form_admin.php" class="btn btn-info">Selengkapnya</a>
             </div>
           </div>
         </div>
