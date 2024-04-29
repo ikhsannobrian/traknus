@@ -48,9 +48,9 @@ $count3 = mysqli_num_rows($query3);
                         <a class="nav-link" aria-current="page" href="target.php">Form</a>
                     </li>
                 </ul>
-            </div>
-            <div>
-                <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+                <div>
+                    <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+                </div>
             </div>
         </div>
     </nav>

@@ -29,27 +29,16 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- 
-           <ul class="navbar-nav mx-auto">
+        <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
-            <a class="nav-link" aria-current="page" href="tabel_admin.php">Infrastruktur</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" aria-current="page" href="target.php">target</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" aria-current="page" href="akun.php">Akun</a>
           </li>
         </ul>
-         -->
-
-      </div>
-      <div>
-        <a href="login_admin.php" class="btn btn-primary">Log Out</a>
+        <div>
+          <a href="login_admin.php" class="btn btn-primary">Log Out</a>
+        </div>
       </div>
     </div>
   </nav>
-  </div>
   <!-- End Navbar -->
   <!-- Start Card -->
   <div class="container-fluid bg-light features">
