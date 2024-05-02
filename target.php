@@ -7,7 +7,18 @@ if (isset($_POST["simpan"])) {
   $periode = $_POST["periode"];
   $tgl_mulai = $_POST["tgl_mulai"];
   $penjelasan = $_POST["penjelasan"];
-  mysqli_query($conn, "INSERT INTO ga_target VALUES('','$nama_target','$periode','$tgl_mulai','$penjelasan','','')");
+  $simpan = mysqli_query($conn, "INSERT INTO ga_target VALUES('','$nama_target','$periode','$tgl_mulai','$penjelasan','','')");
+  if ($simpan) {
+    echo "<script>
+              alert('data anda berhasil disimpan!');
+              document.location='target.php';
+          </script>";
+  } else {
+    echo "<script>
+              alert('simpan data gagal!');
+              document.location='target.php';
+          </script>";
+  }
 }
 ?>
 

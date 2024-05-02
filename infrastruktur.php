@@ -11,7 +11,18 @@ if (isset($_POST["simpan"])) {
   //$status = $_POST["status"];
   // $image = $_POST["image"];
 
-  mysqli_query($conn, "INSERT INTO laporan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','','','')");
+  $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','','','')");
+  if ($simpan) {
+    echo "<script>
+              alert('data anda berhasil disimpan!');
+              document.location='infrastruktur.php';
+          </script>";
+  } else {
+    echo "<script>
+              alert('simpan data gagal!');
+              document.location='infrastruktur.php';
+          </script>";
+  }
 }
 ?>
 

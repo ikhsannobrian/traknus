@@ -18,8 +18,13 @@ if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
-    $image = $_POST["image"];
-    mysqli_query($conn, "UPDATE laporan SET status ='$status', image='$image', pekerja = '$pekerja' WHERE id ='$_id'");
+    $file = $_POST["file"];
+
+    $file_name = $_FILES["file"]["name"];
+    $tmp_name = $_FILES["file"]["tmp_name"];
+    move_uploaded_file($tmp_name, "image/" . $file_names);
+
+    mysqli_query($conn, "UPDATE laporan SET status ='$status', file ='$file', pekerja ='$pekerja' WHERE id ='$_id'");
     header("location:tabel_teknisi.php");
 }
 /** Tampil Data Pada Form **/
@@ -85,7 +90,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                         <p class="text-secondary">Maintenance & Repair</p>
                     </div>
                     <!-- Start Form -->
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <label for="">Nama</label>
                         <div class="input-group mb-3">
                             <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" required />
@@ -100,7 +105,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                         </div>
                         <div class="mb-3">
                             <label for="">Bukti</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple name="image" value="<?php echo $row_edit["image"] ?>">
+                            <input class="form-control" type="file" id="formFileMultiple" multiple name="file">
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
                         <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">
