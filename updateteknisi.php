@@ -16,15 +16,19 @@ if (isset($_POST["simpan"])) {
 /** Proses Update Data **/
 if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
+    $nama = $_POST["nama"];
+    $departemen = $_POST["departemen"];
+    $kebutuhan = $_POST["kebutuhan"];
+    $tanggal = $_POST["tanggal"];
+    $penjelasan = $_POST["penjelasan"];
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
-    $file = $_POST["file"];
 
-    $file_name = $_FILES["file"]["name"];
-    $tmp_name = $_FILES["file"]["tmp_name"];
-    move_uploaded_file($tmp_name, "image/" . $file_names);
+    $image_name = $_FILES["image"]["name"];
+    $tmp_name = $_FILES["image"]["tmp_name"];
+    move_uploaded_file($tmp_name, "image/" . $image_name);
 
-    mysqli_query($conn, "UPDATE laporan SET status ='$status', file ='$file', pekerja ='$pekerja' WHERE id ='$_id'");
+    mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', status ='$status', pekerja ='$pekerja', image='$image_name' WHERE id ='$_id'");
     header("location:tabel_teknisi.php");
 }
 /** Tampil Data Pada Form **/
@@ -105,10 +109,15 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                         </div>
                         <div class="mb-3">
                             <label for="">Bukti</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple name="file">
+                            <input class="form-control" type="file" id="formFileMultiple" accept=".img, .jpeg, .png ,.jpg" name="image">
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="ubah">Simpan</button>
                         <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">
+                        <input type="hidden" name="nama" value="<?php echo $row_edit["nama"] ?>">
+                        <input type="hidden" name="departemen" value="<?php echo $row_edit["departemen"] ?>">
+                        <input type="hidden" name="kebutuhan" value="<?php echo $row_edit["kebutuhan"] ?>">
+                        <input type="hidden" name="tanggal" value="<?php echo $row_edit["tanggal"] ?>">
+                        <input type="hidden" name="penjelasan" value="<?php echo $row_edit["penjelasan"] ?>">
                     </form>
                     <!-- End Form -->
                     <div class="text-center">
