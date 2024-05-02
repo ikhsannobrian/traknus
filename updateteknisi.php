@@ -24,13 +24,22 @@ if (isset($_POST["ubah"])) {
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
 
-    $image_name = $_FILES["image"]["name"];
-    $tmp_name = $_FILES["image"]["tmp_name"];
-    move_uploaded_file($tmp_name, "image/" . $image_name);
+    // Cek apakah ada file gambar yang diunggah
+    if ($_FILES["image"]["size"] > 0) {
+        $image_name = $_FILES["image"]["name"];
+        $tmp_name = $_FILES["image"]["tmp_name"];
+        move_uploaded_file($tmp_name, "image/" . $image_name);
+        // Jika ada file gambar yang diunggah, update kolom gambar
+        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', status ='$status', pekerja ='$pekerja', image='$image_name' WHERE id ='$_id'");
+    } else {
+        // Jika tidak ada file gambar yang diunggah, hanya perbarui data lainnya
+        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', status ='$status', pekerja ='$pekerja' WHERE id ='$_id'");
+    }
 
-    mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', status ='$status', pekerja ='$pekerja', image='$image_name' WHERE id ='$_id'");
     header("location:tabel_teknisi.php");
+    exit();
 }
+
 /** Tampil Data Pada Form **/
 $id = $_GET["update"];
 $edit = mysqli_query($conn, "SELECT * FROM laporan WHERE id ='$id'");
