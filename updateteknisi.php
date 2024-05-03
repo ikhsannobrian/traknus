@@ -106,13 +106,21 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                     <form method="post" enctype="multipart/form-data">
                         <label for="">Nama</label>
                         <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" required />
+                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama pekerja" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" required />
+                        </div>
+                        <label for="">Kebutuhan</label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" aria-label="Default select example" name="kebutuhan" value="<?php echo $row_edit["kebutuhan"] ?>">
+                                <option value=""></option>
+                                <option value="Repair" <?php if ($row_edit['kebutuhan'] == 'Repair') echo 'selected' ?>>Repair</option>
+                                <option value="Maintenance" <?php if ($row_edit['kebutuhan'] == 'Maintenance') echo 'selected' ?>>Maintenance</option>
+                            </select>
                         </div>
                         <label for="">Status</label>
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>">
                                 <option value=""></option>
-                                <option value=" Belum dikerjakan" <?php if ($row_edit['status'] == 'Belum dikerjakan') echo 'selected' ?>>Belum dikerjakan</option>
+                                <option value="Belum dikerjakan" <?php if ($row_edit['status'] == 'Belum dikerjakan') echo 'selected' ?>>Belum dikerjakan</option>
                                 <option value="Sudah dikerjakan" <?php if ($row_edit['status'] == 'Sudah dikerjakan') echo 'selected' ?>>Sudah dikerjakan</option>
                             </select>
                         </div>
@@ -124,7 +132,6 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                         <input type="hidden" name="id" value="<?php echo $row_edit["id"] ?>">
                         <input type="hidden" name="nama" value="<?php echo $row_edit["nama"] ?>">
                         <input type="hidden" name="departemen" value="<?php echo $row_edit["departemen"] ?>">
-                        <input type="hidden" name="kebutuhan" value="<?php echo $row_edit["kebutuhan"] ?>">
                         <input type="hidden" name="tanggal" value="<?php echo $row_edit["tanggal"] ?>">
                         <input type="hidden" name="penjelasan" value="<?php echo $row_edit["penjelasan"] ?>">
                     </form>

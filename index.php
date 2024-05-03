@@ -28,7 +28,7 @@ include "config.php";
   <!-- start navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="">
         <img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" />
       </a>
 
