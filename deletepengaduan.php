@@ -15,4 +15,4 @@ if (isset($_GET["delete"])) {
 				document.location='tabel_admin.php';
 			</script>";
   }
-}
+} 
