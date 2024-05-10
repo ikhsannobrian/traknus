@@ -1,3 +1,9 @@
+<?php
+ob_start();
+session_start();
+if (!isset($_SESSION['admin_id'])) header("location:loginadmin.php");
+include "config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +40,7 @@
           </li>
         </ul>
         <div>
-          <a href="login_admin.php" class="btn btn-primary">Log Out</a>
+          <a href="logoutadmin.php" class="btn btn-primary">Log Out</a>
         </div>
       </div>
     </div>
@@ -95,3 +101,7 @@
 </body>
 
 </html>
+<?php
+mysqli_close($conn);
+ob_end_flush();
+?>

@@ -55,7 +55,7 @@ if (isset($_POST["simpan"])) {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto"></ul>
         <div>
-          <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+          <a href="halamanadmin.php" class="btn btn-primary">Home</a>
         </div>
       </div>
     </div>

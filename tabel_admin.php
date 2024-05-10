@@ -41,7 +41,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
           <li class="nav-item mx-2"></li>
         </ul>
         <div>
-          <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+          <a href="halamanadmin.php" class="btn btn-primary">Home</a>
         </div>
       </div>
     </div>

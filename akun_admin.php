@@ -43,9 +43,9 @@
                         <a class="nav-link mx-3" href="akun_teknisi.php">Akun Teknisi</a>
                     </li>
                 </ul>
-            </div> 
+            </div>
             <div>
-                <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+                <a href="halamanadmin.php" class="btn btn-primary">Home</a>
             </div>
         </div>
         </div>

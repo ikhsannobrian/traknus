@@ -47,7 +47,7 @@ $target = mysqli_query($conn, "SELECT * FROM ga_target ORDER BY id DESC");
           </li>
         </ul>
         <div>
-          <a href="halaman_admin.php" class="btn btn-primary">Home</a>
+          <a href="halamanadmin.php" class="btn btn-primary">Home</a>
         </div>
       </div>
     </div>

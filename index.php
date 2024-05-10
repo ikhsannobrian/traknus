@@ -48,7 +48,7 @@ include "config.php";
           </li>
         </ul>
         <div>
-          <a href="login_admin.php" class="btn btn-primary">Admin</a>
+          <a href="loginadmin.php" class="btn btn-primary">Admin</a>
         </div>
       </div>
     </div>
