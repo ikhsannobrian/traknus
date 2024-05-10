@@ -62,7 +62,7 @@ if (isset($_POST["simpan"])) {
           </li>
         </ul>
         <div>
-          <a href="login_teknisi.php" class="btn btn-primary">Teknisi</a>
+          <a href="loginteknisi.php" class="btn btn-primary">Teknisi</a>
         </div>
       </div>
     </div>

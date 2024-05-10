@@ -14,7 +14,7 @@ if (isset($_POST["simpan"])) {
 }
  **/
 /** Proses Update Data **/
-if (isset($_POST["ubah"])) { 
+if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
     $nama = $_POST["nama"];
     $departemen = $_POST["departemen"];

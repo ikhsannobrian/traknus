@@ -1,3 +1,24 @@
+<?php
+ob_start();
+session_start();
+if (isset($_SESSION['teknisi_username'])) header("location:tabel_teknisi.php");
+include "config.php";
+/** Proses Login **/
+if (isset($_POST["submit"])) {
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+  $sql_tkn = mysqli_query($conn, "SELECT * FROM teknisi WHERE username='$username' AND password='$password'");
+
+  if (mysqli_num_rows($sql_tkn) > 0) {
+    $row_teknisi = mysqli_fetch_array($sql_tkn);
+    $_SESSION['teknisi_id'] = $row_teknisi["id"];
+    $_SESSION['teknisi_username'] = $row_teknisi["username"];
+    header("location:tabel_teknisi.php");
+  } else {
+    header("location:loginteknisi.php?failed");
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,20 +123,20 @@
           </div>
           <!-- End Divider -->
           <!-- Start Form -->
-          <form action="#" method="post">
+          <form action="#" method="post" role="form">
             <div class="input-group mb-3">
               <span class="input-group-text">
                 <i class="bx bxs-user"></i>
               </span>
-              <input type="username" class="form-control form-control-lg fs-6" placeholder="Username" />
+              <input type="username" class="form-control form-control-lg fs-6" placeholder="Username" name="username" />
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">
                 <i class="bx bxs-lock-alt"></i>
               </span>
-              <input type="password" class="form-control form-control-lg fs-6" placeholder="Password" />
+              <input type="password" class="form-control form-control-lg fs-6" placeholder="Password" name="password" />
             </div>
-            <button class="btn btn-primary btn-lg w-100 mb-3">Login</button>
+            <button class="btn btn-primary btn-lg w-100 mb-3" name="submit">Login</button>
           </form>
           <!-- End Form -->
           <div class="text-center">
@@ -132,3 +153,7 @@
 </body>
 
 </html>
+<?php
+mysqli_close($conn);
+ob_end_flush();
+?>

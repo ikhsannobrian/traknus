@@ -1,5 +1,7 @@
 <?php
 ob_start();
+session_start();
+if (!isset($_SESSION['teknisi_id'])) header("location:loginteknisi.php");
 include "config.php";
 
 /**Tampil data**/
@@ -41,7 +43,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
           <li class="nav-item mx-2"></li>
         </ul>
         <div>
-          <a href="login_teknisi.php" class="btn btn-primary">Log Out</a>
+          <a href="logoutteknisi.php" class="btn btn-primary">Log Out</a>
         </div>
       </div>
     </div>

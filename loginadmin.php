@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
     $_SESSION['admin_username'] = $row_admin["username"];
     header("location:halamanadmin.php");
   } else {
-    header("location:login.php?failed");
+    header("location:loginadmin.php?failed");
   }
 }
 ?>
@@ -115,6 +115,11 @@ if (isset($_POST["submit"])) {
             <i class="bx bxl-google text-danger me-1 fs-6"></i>Login with
             Google
           </button>
+          <?php if (isset($_GET["failed"])) { ?>
+            <div class="alert alert-danger alert-dismissable">
+              <p>Username atau password yang anda masukan salah</p>
+            </div>
+          <?php } ?>
           <!-- End Social Login -->
           <!-- Start Divider -->
           <div class="position-relative">
