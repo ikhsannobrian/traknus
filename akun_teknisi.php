@@ -1,3 +1,10 @@
+<?php
+ob_start();
+include "config.php";
+
+/**Tampil data**/
+$akun = mysqli_query($conn, "SELECT * FROM teknisi ORDER BY id DESC");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,12 +65,24 @@
                     <th>No.</th>
                     <th>Username</th>
                     <th>Password</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <td>1</td>
-                <td>teknisi1</td>
-                <td>123456</td>
+                <?php if (mysqli_num_rows($akun)) { ?>
+                    <?php $no = 1 ?>
+                    <?php while ($row_akun = mysqli_fetch_array($akun)) { ?>
+                        <tr>
+                            <td><?php echo $no ?></td>
+                            <td><?php echo $row_akun["username"] ?></td>
+                            <td><?php echo $row_akun["password"] ?></td>
+                            <td>
+                                <a href="deleteteknisi.php?delete=<?php echo $row_akun["id"] ?>" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <?php $no++;
+                    } ?>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -79,3 +98,7 @@
 </body>
 
 </html>
+<?php
+mysqli_close($conn);
+ob_end_flush();
+?>

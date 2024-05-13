@@ -1,3 +1,24 @@
+<?php
+ob_start();
+include "config.php";
+
+if (isset($_POST["simpan"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $simpan = mysqli_query($conn, "INSERT INTO admin VALUES('','$username','$password')");
+    if ($simpan) {
+        echo "<script>
+                  alert('akun admin berhasil dibuat!');
+                  document.location='form_admin.php';
+              </script>";
+    } else {
+        echo "<script>
+                  alert('akun admin gagal dibuat!');
+                  document.location='form_admin.php';
+              </script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,11 +89,11 @@
                     <form method="post">
                         <label for="">Username</label>
                         <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="masukan username anda" name="" required />
+                            <input type="name" class="form-control form-control-lg fs-6" placeholder="masukan username anda" name="username" required />
                         </div>
                         <label for="">Password</label>
                         <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan password anda" name="" required />
+                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan password anda" name="password" required />
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="simpan">
                             Simpan
@@ -94,3 +115,7 @@
 </body>
 
 </html>
+<?php
+mysqli_close($conn);
+ob_end_flush();
+?>
