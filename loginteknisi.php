@@ -128,7 +128,7 @@ if (isset($_POST["submit"])) {
               <span class="input-group-text">
                 <i class="bx bxs-user"></i>
               </span>
-              <input type="username" class="form-control form-control-lg fs-6" placeholder="Username" name="username" />
+              <input type="username" class="form-control form-control-lg fs-6" placeholder="Username" name="username" required />
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">
