@@ -64,6 +64,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
           <th>Kebutuhan</th>
           <th>Tanggal</th>
           <th>Penjelasan</th>
+          <th>Lokasi</th>
           <th>Status</th>
           <th>Pekerja</th>
           <th>Aksi</th>
@@ -80,6 +81,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
               <td><?php echo $row_pengaduan["kebutuhan"] ?></td>
               <td><?php echo $row_pengaduan["tanggal"] ?></td>
               <td><?php echo $row_pengaduan["penjelasan"] ?></td>
+              <td><?php echo $row_pengaduan["lokasi"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td><?php echo $row_pengaduan["pekerja"] ?></td>
               <td>

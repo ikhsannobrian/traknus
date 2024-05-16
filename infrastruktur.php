@@ -8,10 +8,11 @@ if (isset($_POST["simpan"])) {
   $kebutuhan = $_POST["kebutuhan"];
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
+  $lokasi = $_POST["lokasi"];
   //$status = $_POST["status"];
   // $image = $_POST["image"];
 
-  $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','','','')");
+  $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$lokasi','','','')");
   if ($simpan) {
     echo "<script>
               alert('data anda berhasil disimpan!');
@@ -138,6 +139,10 @@ if (isset($_POST["simpan"])) {
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Penjelasan</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan diperbaiki/maintenance" name="penjelasan"></textarea>
+            </div>
+            <label for="">Lokasi</label>
+            <div class="input-group mb-3">
+              <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan lokasi kerusakan/maintenance" name="lokasi" required />
             </div>
             <!--
             <label for="">Status</label>
