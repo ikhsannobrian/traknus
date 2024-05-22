@@ -23,9 +23,15 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
-  <link rel="stylesheet" href="style_infra.css" />
+  <link rel="stylesheet" href="" />
   <title>Daftar Pengaduan</title>
 </head>
+<style>
+  table {
+    font-family: "poppins", "sans-serif";
+    font-size: 13px;
+  }
+</style>
 
 <body>
   <!-- Start Navbar -->
@@ -38,7 +44,15 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item mx-2"></li>
+          <li class="nav-item mx-3">
+            <a class="nav-link" aria-current="page" href="#">Laporan</a>
+          </li>
+          <li class="nav-item mx-3">
+            <a class="nav-link" href="repair_mtn.php">R & M</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-3" href="pekerja.php">Pekerja</a>
+          </li>
         </ul>
         <div>
           <a href="halamanadmin.php" class="btn btn-primary">Home</a>
@@ -72,7 +86,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
         <?php if (mysqli_num_rows($pengaduan)) { ?>
           <?php $no = 1 ?>
           <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) { ?>
-            <tr>
+            <tr class="table">
               <td><?php echo $no ?></td>
               <td><?php echo $row_pengaduan["nama"] ?></td>
               <td><?php echo $row_pengaduan["departemen"] ?></td>

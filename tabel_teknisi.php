@@ -3,7 +3,6 @@ ob_start();
 session_start();
 if (!isset($_SESSION['teknisi_id'])) header("location:loginteknisi.php");
 include "config.php";
-
 /**Tampil data**/
 $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
 ?>
@@ -25,9 +24,15 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
-  <link rel="stylesheet" href="style_infra.css" />
+  <link rel="stylesheet" href="" />
   <title>Daftar Pengaduan</title>
 </head>
+<style>
+  table {
+    font-family: "poppins", "sans-serif";
+    font-size: 13px;
+  }
+</style>
 
 <body>
   <!-- Start Navbar -->
@@ -40,7 +45,6 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item mx-2"></li>
         </ul>
         <div>
           <a href="logoutteknisi.php" class="btn btn-primary">Log Out</a>
@@ -49,10 +53,6 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
     </div>
   </nav>
   <!-- End Navbar -->
-  <!-- Start Filter -->
-  <!-- Filter Tanggal -->
-
-  <!-- End Filter -->
   <!-- Start Table -->
   <div class="table-responsive">
     <table class="table table-striped mt-2 text-center">
@@ -74,7 +74,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
         <?php if (mysqli_num_rows($pengaduan)) { ?>
           <?php $no = 1 ?>
           <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) { ?>
-            <tr>
+            <tr class="table">
               <td><?php echo $no ?></td>
               <td><?php echo $row_pengaduan["nama"] ?></td>
               <td><?php echo $row_pengaduan["departemen"] ?></td>
