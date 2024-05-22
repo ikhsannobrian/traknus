@@ -69,7 +69,7 @@ $monthly_count = mysqli_query($conn, "
                     </li>
                 </ul>
                 <div>
-                    <a href="halamanadmin.php" class="btn btn-primary">Home</a>
+                    <button onclick="window.print()" class="btn btn-primary">Print this page</button>
                 </div>
             </div>
         </div>
