@@ -4,7 +4,6 @@ use function PHPSTORM_META\type;
 
 ob_start();
 session_start();
-if (!isset($_SESSION['teknisi_id'])) header("location:loginteknisi.php");
 include "config.php";
 
 // Handle form submission for month filter

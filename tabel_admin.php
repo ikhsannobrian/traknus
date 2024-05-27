@@ -60,7 +60,7 @@ $pengaduan = mysqli_query($conn, $query);
   <!-- Start Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="">
+      <a class="navbar-brand" href="#">
         <img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -98,6 +98,9 @@ $pengaduan = mysqli_query($conn, $query);
       </div>
       <div class="form-group mx-2 align-self-end">
         <button type="submit" class="btn btn-primary">Filter</button>
+      </div>
+      <div class="form-group mx-2 align-self-end">
+        <a href="excel.php?month=<?= $monthFilter ?>" class="btn btn-primary">excel</a>
       </div>
     </form>
   </div>
@@ -141,7 +144,7 @@ $pengaduan = mysqli_query($conn, $query);
               <td><?php echo $row_pengaduan["wkt_kerja"] ?></td>
               <td>
                 <a href="deletepengaduan.php?delete=<?php echo $row_pengaduan["id"] ?>" class="btn btn-danger">Delete</a>
-                <a href="image/<?php echo $row_pengaduan["image"] ?>" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
+                <a href="image/<?php echo $row_pengaduan["image"] ?>" target="_blank" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
               </td>
             </tr>
           <?php $no++;
