@@ -70,16 +70,6 @@ include "config.php";
           <div class="card">
             <img src="image/gedung traknus.jpg" class="img-fluid" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Target</h5>
-              <p class="card-text">Makes some targets to achieve it </p>
-              <a href="target.php" class="btn btn-info">Selengkapnya</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mt-2">
-          <div class="card">
-            <img src="image/gedung traknus.jpg" class="img-fluid" alt="...">
-            <div class="card-body">
               <h5 class="card-title">Account</h5>
               <p class="card-text">Create, handle, & maintain our account</p>
               <a href="form_admin.php" class="btn btn-info">Selengkapnya</a>

@@ -2,8 +2,16 @@
 ob_start();
 include "config.php";
 
-/**Tampil data**/
-$pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
+// Handle form submission for month filter
+$monthFilter = isset($_POST['month']) ? $_POST['month'] : '';
+
+// Tampilkan data dengan filter bulan jika ada
+$query = "SELECT * FROM laporan";
+if ($monthFilter) {
+  $query .= " WHERE MONTH(tanggal) = '$monthFilter'";
+}
+$query .= " ORDER BY id DESC";
+$pengaduan = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,13 +33,28 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
   <!-- My style -->
   <link rel="stylesheet" href="" />
   <title>Daftar Pengaduan</title>
+  <style>
+    table {
+      font-family: "Poppins", "sans-serif";
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      white-space: nowrap;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f8f9fa;
+    }
+
+    .table-responsive {
+      margin: 20px;
+    }
+  </style>
 </head>
-<style>
-  table {
-    font-family: "poppins", "sans-serif";
-    font-size: 13px;
-  }
-</style>
 
 <body>
   <!-- Start Navbar -->
@@ -44,15 +67,6 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item mx-3">
-            <a class="nav-link" aria-current="page" href="#">Laporan</a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link" href="repair_mtn.php">R & M</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link mx-3" href="pekerja.php">Pekerja</a>
-          </li>
         </ul>
         <div>
           <a href="halamanadmin.php" class="btn btn-primary">Home</a>
@@ -61,10 +75,33 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
     </div>
   </nav>
   <!-- End Navbar -->
-  <!-- Start Filter -->
-  <!-- Filter Tanggal -->
-
-  <!-- End Filter -->
+  <!-- Start Filter Form -->
+  <div class="container mt-4">
+    <form method="post" class="d-flex justify-content-center">
+      <div class="form-group mx-2">
+        <label for="month" class="form-label">Filter by Month:</label>
+        <select name="month" id="month" class="form-select">
+          <option value="">All Month</option>
+          <option value="1" <?php if ($monthFilter == '1') echo 'selected'; ?>>January</option>
+          <option value="2" <?php if ($monthFilter == '2') echo 'selected'; ?>>February</option>
+          <option value="3" <?php if ($monthFilter == '3') echo 'selected'; ?>>March</option>
+          <option value="4" <?php if ($monthFilter == '4') echo 'selected'; ?>>April</option>
+          <option value="5" <?php if ($monthFilter == '5') echo 'selected'; ?>>May</option>
+          <option value="6" <?php if ($monthFilter == '6') echo 'selected'; ?>>June</option>
+          <option value="7" <?php if ($monthFilter == '7') echo 'selected'; ?>>July</option>
+          <option value="8" <?php if ($monthFilter == '8') echo 'selected'; ?>>August</option>
+          <option value="9" <?php if ($monthFilter == '9') echo 'selected'; ?>>September</option>
+          <option value="10" <?php if ($monthFilter == '10') echo 'selected'; ?>>October</option>
+          <option value="11" <?php if ($monthFilter == '11') echo 'selected'; ?>>November</option>
+          <option value="12" <?php if ($monthFilter == '12') echo 'selected'; ?>>December</option>
+        </select>
+      </div>
+      <div class="form-group mx-2 align-self-end">
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </div>
+    </form>
+  </div>
+  <!-- End Filter Form -->
   <!-- Start Table -->
   <div class="table-responsive">
     <table class="table table-striped mt-2 text-center">
@@ -74,11 +111,14 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
           <th>Nama</th>
           <th>Departemen</th>
           <th>Kebutuhan</th>
-          <th>Tanggal</th>
+          <th>Tanggal Pengaduan</th>
           <th>Penjelasan</th>
           <th>Lokasi</th>
+          <th>Tanggal Kerja</th>
+          <th>Jenis Pengaduan</th>
           <th>Status</th>
           <th>Pekerja</th>
+          <th>Lama Kerja</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -94,8 +134,11 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
               <td><?php echo $row_pengaduan["tanggal"] ?></td>
               <td><?php echo $row_pengaduan["penjelasan"] ?></td>
               <td><?php echo $row_pengaduan["lokasi"] ?></td>
+              <td><?php echo $row_pengaduan["tgl_kerja"] ?></td>
+              <td><?php echo $row_pengaduan["jenis"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td><?php echo $row_pengaduan["pekerja"] ?></td>
+              <td><?php echo $row_pengaduan["wkt_kerja"] ?></td>
               <td>
                 <a href="deletepengaduan.php?delete=<?php echo $row_pengaduan["id"] ?>" class="btn btn-danger">Delete</a>
                 <a href="image/<?php echo $row_pengaduan["image"] ?>" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>

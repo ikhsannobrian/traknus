@@ -21,8 +21,11 @@ if (isset($_POST["ubah"])) {
     $kebutuhan = $_POST["kebutuhan"];
     $tanggal = $_POST["tanggal"];
     $penjelasan = $_POST["penjelasan"];
+    $tgl_kerja = $_POST["tgl_kerja"];
+    $jenis = $_POST["jenis"];
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
+    $wkt_kerja = $_POST["wkt_kerja"];
 
     // Cek apakah ada file gambar yang diunggah
     if ($_FILES["image"]["size"] > 0) {
@@ -30,10 +33,10 @@ if (isset($_POST["ubah"])) {
         $tmp_name = $_FILES["image"]["tmp_name"];
         move_uploaded_file($tmp_name, "image/" . $image_name);
         // Jika ada file gambar yang diunggah, update kolom gambar
-        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', status ='$status', pekerja ='$pekerja', image='$image_name' WHERE id ='$_id'");
+        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', tgl_kerja='$tgl_kerja', jenis='$jenis', status ='$status', pekerja ='$pekerja', wkt_kerja='$wkt_kerja', image='$image_name' WHERE id ='$_id'");
     } else {
         // Jika tidak ada file gambar yang diunggah, hanya perbarui data lainnya
-        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', status ='$status', pekerja ='$pekerja' WHERE id ='$_id'");
+        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan',tgl_kerja='$tgl_kerja', jenis='$jenis', status ='$status', pekerja ='$pekerja', wkt_kerja='$wkt_kerja' WHERE id ='$_id'");
     }
 
     header("location:tabel_teknisi.php");
@@ -115,6 +118,22 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                                 <option value="Repair" <?php if ($row_edit['kebutuhan'] == 'Repair') echo 'selected' ?>>Repair</option>
                                 <option value="Maintenance" <?php if ($row_edit['kebutuhan'] == 'Maintenance') echo 'selected' ?>>Maintenance</option>
                             </select>
+                        </div>
+                        <label for="">Tanggal Pengerjaan</label>
+                        <div>
+                            <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tgl_kerja" value="<?php echo $row_edit["tgl_kerja"] ?>" />
+                        </div>
+                        <label for="">Jenis Pengaduan</label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" aria-label="Default select example" name="jenis" value="<?php echo $row_edit["jenis"] ?>">
+                                <option value=""></option>
+                                <option value="Pengaduan" <?php if ($row_edit['jenis'] == 'Pengaduan') echo 'selected' ?>>Pengaduan</option>
+                                <option value="Non-Pengaduan" <?php if ($row_edit['jenis'] == 'Non-Pengaduan') echo 'selected' ?>>Non-Pengaduan</option>
+                            </select>
+                        </div>
+                        <label for="">Lama Pengerjaan</label>
+                        <div class="input-group mb-3">
+                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan Lama Pengerjaan(Jam/Menit)" name="wkt_kerja" value="<?php echo $row_edit["wkt_kerja"] ?>" required />
                         </div>
                         <label for="">Status</label>
                         <div class="mb-3">

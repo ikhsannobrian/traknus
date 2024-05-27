@@ -44,8 +44,23 @@ if (isset($_POST["simpan"])) {
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
-  <link rel="stylesheet" href="style_infra.css" />
+  <link rel="stylesheet" href="" />
   <title>Form Pengaduan</title>
+  <style>
+    .tulisan {
+      font-size: 15px;
+    }
+
+    .form-select {
+      font-size: 14px;
+      padding: 8px;
+    }
+
+    .form-select option {
+      white-space: nowrap;
+      padding: 10px;
+    }
+  </style>
 </head>
 
 <body>
@@ -83,7 +98,7 @@ if (isset($_POST["simpan"])) {
             <p class="text-secondary">Maintenance & Repair</p>
           </div>
           <!-- Start Form -->
-          <form method="post">
+          <form method="post" class="tulisan">
             <label for="">Nama</label>
             <div class="input-group mb-3">
               <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" required />
@@ -132,7 +147,7 @@ if (isset($_POST["simpan"])) {
                 <option value="Maintenance">Maintenance</option>
               </select>
             </div>
-            <label for="">Tanggal</label>
+            <label for="">Tanggal Pengaduan</label>
             <div>
               <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tanggal" />
             </div>

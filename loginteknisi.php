@@ -34,7 +34,7 @@ if (isset($_POST["submit"])) {
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- box icons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <title>Login Admin</title>
+  <title>Login Teknisi</title>
   <style>
     .body {
       font-family: "poppins", "sans-serif";
