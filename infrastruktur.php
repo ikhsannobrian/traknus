@@ -9,18 +9,17 @@ if (isset($_POST["simpan"])) {
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
   $lokasi = $_POST["lokasi"];
-  //$status = $_POST["status"];
-  // $image = $_POST["image"];
+  $status = "Belum dikerjakan"; // Set default status
 
-  $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$lokasi','','','')");
+  $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, kebutuhan, tanggal, penjelasan, lokasi, status) VALUES('$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$lokasi','$status')");
   if ($simpan) {
     echo "<script>
-              alert('data anda berhasil disimpan!');
+              alert('Data Anda berhasil disimpan!');
               document.location='infrastruktur.php';
           </script>";
   } else {
     echo "<script>
-              alert('simpan data gagal!');
+              alert('Simpan data gagal!');
               document.location='infrastruktur.php';
           </script>";
   }
@@ -90,8 +89,7 @@ if (isset($_POST["simpan"])) {
       <div class="row align-items-center justify-content-center h-100 g-0 px-4 px-sm-0">
         <div class="col col-sm-6 col-lg-7 col-xl-6">
           <!-- Start Logo  -->
-          <a href="#" class="d-flex justify-content-center mb-4"><img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" />
-          </a>
+          <a href="#" class="d-flex justify-content-center mb-4"><img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" /></a>
           <!-- End Logo -->
           <div class="text-center">
             <h3 class="fw-bold">Form Pengaduan</h3>

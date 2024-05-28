@@ -23,9 +23,12 @@ if (isset($_POST["ubah"])) {
     $penjelasan = $_POST["penjelasan"];
     $tgl_kerja = $_POST["tgl_kerja"];
     $jenis = $_POST["jenis"];
+    $wkt_mulai = $_POST["wkt_mulai"];
+    $wkt_mulai = date("H:i", strtotime($wkt_mulai));
+    $wkt_akhir = $_POST["wkt_akhir"];
+    $wkt_akhir = date("H:i", strtotime($wkt_akhir));
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
-    $wkt_kerja = $_POST["wkt_kerja"];
 
     // Cek apakah ada file gambar yang diunggah
     if ($_FILES["image"]["size"] > 0) {
@@ -33,10 +36,10 @@ if (isset($_POST["ubah"])) {
         $tmp_name = $_FILES["image"]["tmp_name"];
         move_uploaded_file($tmp_name, "image/" . $image_name);
         // Jika ada file gambar yang diunggah, update kolom gambar
-        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', tgl_kerja='$tgl_kerja', jenis='$jenis', status ='$status', pekerja ='$pekerja', wkt_kerja='$wkt_kerja', image='$image_name' WHERE id ='$_id'");
+        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan', tgl_kerja='$tgl_kerja', jenis='$jenis', status ='$status', pekerja ='$pekerja', image='$image_name' WHERE id ='$_id'");
     } else {
         // Jika tidak ada file gambar yang diunggah, hanya perbarui data lainnya
-        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan',tgl_kerja='$tgl_kerja', jenis='$jenis', status ='$status', pekerja ='$pekerja', wkt_kerja='$wkt_kerja' WHERE id ='$_id'");
+        mysqli_query($conn, "UPDATE laporan SET nama ='$nama', departemen ='$departemen', kebutuhan='$kebutuhan', tanggal='$tanggal', penjelasan='$penjelasan',tgl_kerja='$tgl_kerja', jenis='$jenis',wkt_mulai='$wkt_mulai',wkt_akhir='$wkt_akhir', status ='$status', pekerja ='$pekerja' WHERE id ='$_id'");
     }
 
     header("location:tabel_teknisi.php");
@@ -109,7 +112,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                     <form method="post" enctype="multipart/form-data">
                         <label for="">Nama</label>
                         <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama pekerja" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" required />
+                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama pekerja" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" />
                         </div>
                         <label for="">Kebutuhan</label>
                         <div class="input-group mb-3">
@@ -131,9 +134,13 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                                 <option value="Non-Pengaduan" <?php if ($row_edit['jenis'] == 'Non-Pengaduan') echo 'selected' ?>>Non-Pengaduan</option>
                             </select>
                         </div>
-                        <label for="">Lama Pengerjaan</label>
+                        <label for="">Waktu Mulai Pengerjaan</label>
                         <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan Lama Pengerjaan(Jam/Menit)" name="wkt_kerja" value="<?php echo $row_edit["wkt_kerja"] ?>" required />
+                            <input type="time" id="jam_mulai" name="wkt_mulai" value="<?php echo $row_edit["wkt_mulai"] ?>">
+                        </div>
+                        <label for="">Selesai Pengerjaan</label>
+                        <div class="input-group mb-3">
+                            <input type="time" id="jam_akhir" name="wkt_akhir" value="<?php echo $row_edit["wkt_akhir"] ?>">
                         </div>
                         <label for="">Status</label>
                         <div class="mb-3">

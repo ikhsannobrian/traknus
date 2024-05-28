@@ -11,11 +11,14 @@ if (isset($_POST["simpan"])) {
     $lokasi = $_POST["lokasi"];
     $tgl_kerja = $_POST["tgl_kerja"];
     $jenis = $_POST["jenis"];
+    $wkt_mulai = $_POST["wkt_mulai"];
+    $wkt_mulai = date("H:i", strtotime($wkt_mulai));
+    $wkt_akhir = $_POST["wkt_akhir"];
+    $wkt_akhir = date("H:i", strtotime($wkt_akhir));
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
-    $wkt_kerja = $_POST["wkt_kerja"];
 
-    $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('', '$nama', '$departemen', '$kebutuhan', '$tanggal', '$penjelasan', '$lokasi', '$tgl_kerja', '$jenis', '$status', '$pekerja', '$wkt_kerja', '')");
+    $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('', '$nama', '$departemen', '$kebutuhan', '$tanggal', '$penjelasan', '$lokasi', '$tgl_kerja', '$jenis','$wkt_mulai','$wkt_akhir', '$status', '$pekerja', '')");
 
     if ($simpan) {
         echo "<script>
@@ -174,6 +177,14 @@ if (isset($_POST["simpan"])) {
                                 <option value="Non-Pengaduan">Non-Pengaduan</option>
                             </select>
                         </div>
+                        <label for="">Waktu Mulai Pengerjaan</label>
+                        <div class="input-group mb-3">
+                            <input type="time" id="jam_mulai" name="wkt_mulai">
+                        </div>
+                        <label for="">Selesai Pengerjaan</label>
+                        <div class="input-group mb-3">
+                            <input type="time" id="jam_akhir" name="wkt_akhir">
+                        </div>
                         <label for="">Status</label>
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status">
@@ -185,10 +196,6 @@ if (isset($_POST["simpan"])) {
                         <label for="">Nama Pekerja</label>
                         <div class="input-group mb-3">
                             <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama pekerja" name="pekerja" required />
-                        </div>
-                        <label for="">Lama Pengerjaan</label>
-                        <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan Lama Pengerjaan(Jam/Menit)" name="wkt_kerja" required />
                         </div>
 
                         <!-- <div class="mb-3">

@@ -4,13 +4,17 @@ session_start();
 if (!isset($_SESSION['teknisi_id'])) header("location:loginteknisi.php");
 include "config.php";
 
-// Handle form submission for month filter
+// Handle form submission for month and status filter
 $monthFilter = isset($_POST['month']) ? $_POST['month'] : '';
+$statusFilter = isset($_POST['status']) ? $_POST['status'] : '';
 
-// Tampilkan data dengan filter bulan jika ada
-$query = "SELECT * FROM laporan";
+// Tampilkan data dengan filter bulan dan status jika ada
+$query = "SELECT * FROM laporan WHERE 1=1";
 if ($monthFilter) {
-  $query .= " WHERE MONTH(tanggal) = '$monthFilter'";
+  $query .= " AND MONTH(tanggal) = '$monthFilter'";
+}
+if ($statusFilter) {
+  $query .= " AND status = '$statusFilter'";
 }
 $query .= " ORDER BY id DESC";
 $pengaduan = mysqli_query($conn, $query);
@@ -34,7 +38,7 @@ $pengaduan = mysqli_query($conn, $query);
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
   <link rel="stylesheet" href="" />
-  <title>Daftar Pengaduan</title>
+  <title>Daftar Pengaduan Teknisi</title>
   <style>
     table {
       font-family: "Poppins", "sans-serif";
@@ -82,8 +86,8 @@ $pengaduan = mysqli_query($conn, $query);
   <!-- End Navbar -->
   <!-- Start Filter Form -->
   <div class="container mt-4">
-    <form method="post" class="d-flex justify-content-center">
-      <div class="form-group mx-2">
+    <form method="post" class="row g-3">
+      <div class="col-md-4">
         <label for="month" class="form-label">Filter by Month:</label>
         <select name="month" id="month" class="form-select">
           <option value="">All Month</option>
@@ -101,11 +105,17 @@ $pengaduan = mysqli_query($conn, $query);
           <option value="12" <?php if ($monthFilter == '12') echo 'selected'; ?>>December</option>
         </select>
       </div>
-      <div class="form-group mx-2 align-self-end">
-        <button type="submit" class="btn btn-primary">Filter</button>
+      <div class="col-md-4">
+        <label for="status" class="form-label">Filter by Status:</label>
+        <select name="status" id="status" class="form-select">
+          <option value="">All Status</option>
+          <option value="Sudah Dikerjakan" <?php if ($statusFilter == 'Sudah Dikerjakan') echo 'selected'; ?>>Sudah Dikerjakan</option>
+          <option value="Belum Dikerjakan" <?php if ($statusFilter == 'Belum Dikerjakan') echo 'selected'; ?>>Belum Dikerjakan</option>
+        </select>
       </div>
-      <div class="form-group mx-2 align-self-end">
-        <a href="excel.php?month=<?= $monthFilter ?>" class="btn btn-primary">excel</a>
+      <div class="col-md-4 align-self-end">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <!-- <a href="excel.php?month=<?= $monthFilter ?>" class="btn btn-primary">Excel</a> -->
       </div>
     </form>
   </div>
@@ -124,9 +134,10 @@ $pengaduan = mysqli_query($conn, $query);
           <th>Lokasi</th>
           <th>Tanggal Kerja</th>
           <th>Jenis Pengaduan</th>
+          <th>Mulai Pekerjaan</th>
+          <th>Selesai Pekerjaan</th>
           <th>Status</th>
-          <th>Pekerja</th>
-          <th>Lama Kerja</th>
+          <th>Nama Pekerja</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -144,9 +155,10 @@ $pengaduan = mysqli_query($conn, $query);
               <td><?php echo $row_pengaduan["lokasi"] ?></td>
               <td><?php echo $row_pengaduan["tgl_kerja"] ?></td>
               <td><?php echo $row_pengaduan["jenis"] ?></td>
+              <td><?php echo $row_pengaduan["wkt_mulai"] ?></td>
+              <td><?php echo $row_pengaduan["wkt_akhir"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td><?php echo $row_pengaduan["pekerja"] ?></td>
-              <td><?php echo $row_pengaduan["wkt_kerja"] ?></td>
               <td>
                 <a href="updateteknisi.php?update=<?php echo $row_pengaduan["id"] ?>" class="btn btn-primary mb-2">Update</a>
                 <a href="image/<?php echo $row_pengaduan["image"] ?>" target="_blank" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>

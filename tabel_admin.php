@@ -4,11 +4,15 @@ include "config.php";
 
 // Handle form submission for month filter
 $monthFilter = isset($_POST['month']) ? $_POST['month'] : '';
+$statusFilter = isset($_POST['status']) ? $_POST['status'] : '';
 
-// Tampilkan data dengan filter bulan jika ada
-$query = "SELECT * FROM laporan";
+// Tampilkan data dengan filter bulan dan status jika ada
+$query = "SELECT * FROM laporan WHERE 1=1";
 if ($monthFilter) {
-  $query .= " WHERE MONTH(tanggal) = '$monthFilter'";
+  $query .= " AND MONTH(tanggal) = '$monthFilter'";
+}
+if ($statusFilter) {
+  $query .= " AND status = '$statusFilter'";
 }
 $query .= " ORDER BY id DESC";
 $pengaduan = mysqli_query($conn, $query);
@@ -32,7 +36,7 @@ $pengaduan = mysqli_query($conn, $query);
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
   <link rel="stylesheet" href="" />
-  <title>Daftar Pengaduan</title>
+  <title>Daftar Pengaduan Admin</title>
   <style>
     table {
       font-family: "Poppins", "sans-serif";
@@ -77,8 +81,8 @@ $pengaduan = mysqli_query($conn, $query);
   <!-- End Navbar -->
   <!-- Start Filter Form -->
   <div class="container mt-4">
-    <form method="post" class="d-flex justify-content-center">
-      <div class="form-group mx-2">
+    <form method="post" class="row g-3">
+      <div class="col-md-4">
         <label for="month" class="form-label">Filter by Month:</label>
         <select name="month" id="month" class="form-select">
           <option value="">All Month</option>
@@ -96,11 +100,17 @@ $pengaduan = mysqli_query($conn, $query);
           <option value="12" <?php if ($monthFilter == '12') echo 'selected'; ?>>December</option>
         </select>
       </div>
-      <div class="form-group mx-2 align-self-end">
-        <button type="submit" class="btn btn-primary">Filter</button>
+      <div class="col-md-4">
+        <label for="status" class="form-label">Filter by Status:</label>
+        <select name="status" id="status" class="form-select">
+          <option value="">All Status</option>
+          <option value="Sudah Dikerjakan" <?php if ($statusFilter == 'Sudah Dikerjakan') echo 'selected'; ?>>Sudah Dikerjakan</option>
+          <option value="Belum Dikerjakan" <?php if ($statusFilter == 'Belum Dikerjakan') echo 'selected'; ?>>Belum Dikerjakan</option>
+        </select>
       </div>
-      <div class="form-group mx-2 align-self-end">
-        <a href="excel.php?month=<?= $monthFilter ?>" class="btn btn-primary">excel</a>
+      <div class="col-md-4 align-self-end">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="excel.php?month=<?= $monthFilter ?>&status=<?php echo $statusFilter ?>" class="btn btn-primary">Excel</a>
       </div>
     </form>
   </div>
@@ -121,7 +131,6 @@ $pengaduan = mysqli_query($conn, $query);
           <th>Jenis Pengaduan</th>
           <th>Status</th>
           <th>Pekerja</th>
-          <th>Lama Kerja</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -141,7 +150,6 @@ $pengaduan = mysqli_query($conn, $query);
               <td><?php echo $row_pengaduan["jenis"] ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td><?php echo $row_pengaduan["pekerja"] ?></td>
-              <td><?php echo $row_pengaduan["wkt_kerja"] ?></td>
               <td>
                 <a href="deletepengaduan.php?delete=<?php echo $row_pengaduan["id"] ?>" class="btn btn-danger">Delete</a>
                 <a href="image/<?php echo $row_pengaduan["image"] ?>" target="_blank" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
@@ -159,6 +167,7 @@ $pengaduan = mysqli_query($conn, $query);
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
+    <script src="https://cdn.jsdelivr
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->

@@ -8,11 +8,14 @@ include "config.php";
 
 // Handle form submission for month filter
 $monthFilter = isset($_GET['month']) ? $_GET['month'] : '';
-
-// Tampilkan data dengan filter bulan jika ada
-$query = "SELECT * FROM laporan";
+$statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
+// Tampilkan data dengan filter bulan dan status jika ada
+$query = "SELECT * FROM laporan WHERE 1=1"; // 1=1 is a trick to simplify appending conditions
 if ($monthFilter) {
-    $query .= " WHERE MONTH(tanggal) = '$monthFilter'";
+    $query .= " AND MONTH(tanggal) = '$monthFilter'";
+}
+if ($statusFilter) {
+    $query .= " AND status = '$statusFilter'";
 }
 $query .= " ORDER BY id DESC";
 $pengaduan = mysqli_query($conn, $query);
