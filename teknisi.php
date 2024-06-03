@@ -17,8 +17,7 @@ if (isset($_POST["simpan"])) {
     $wkt_akhir = date("H:i", strtotime($wkt_akhir));
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
-
-    $simpan = mysqli_query($conn, "INSERT INTO laporan VALUES('', '$nama', '$departemen', '$kebutuhan', '$tanggal', '$penjelasan', '$lokasi', '$tgl_kerja', '$jenis','$wkt_mulai','$wkt_akhir', '$status', '$pekerja', '')");
+    $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, kebutuhan, tanggal, penjelasan, lokasi,tgl_kerja,jenis, wkt_mulai,wkt_akhir, status,pekerja) VALUES('$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$lokasi','$tgl_kerja','$jenis','$wkt_mulai','$wkt_akhir','$status','$pekerja')");
 
     if ($simpan) {
         echo "<script>

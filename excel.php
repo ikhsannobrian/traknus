@@ -10,7 +10,7 @@ include "config.php";
 $monthFilter = isset($_GET['month']) ? $_GET['month'] : '';
 $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
 // Tampilkan data dengan filter bulan dan status jika ada
-$query = "SELECT * FROM laporan WHERE 1=1"; // 1=1 is a trick to simplify appending conditions
+$query = "SELECT *, TIMESTAMPDIFF(MINUTE, wkt_mulai, wkt_akhir) AS durasi_menit FROM laporan WHERE 1=1";
 if ($monthFilter) {
     $query .= " AND MONTH(tanggal) = '$monthFilter'";
 }
@@ -43,15 +43,22 @@ header("Content-Disposition: attachment; filename=Data Pegawai.xls");
                 <th>Lokasi</th>
                 <th>Tanggal Kerja</th>
                 <th>Jenis Pengaduan</th>
+                <th>Mulai Pekerjaan</th>
+                <th>Selesai Pekerjaan</th>
+                <th>Durasi (Jam:Menit)</th>
                 <th>Status</th>
-                <th>Pekerja</th>
-                <th>Lama Kerja</th>
+                <th>Nama Pekerja</th>
             </tr>
         </thead>
         <tbody>
             <?php if (mysqli_num_rows($pengaduan)) { ?>
                 <?php $no = 1 ?>
-                <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) { ?>
+                <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) {
+                    $durasiMenit = $row_pengaduan["durasi_menit"];
+                    $hours = floor($durasiMenit / 60);
+                    $minutes = $durasiMenit % 60;
+                    $durasiFormatted = sprintf("%02d:%02d", $hours, $minutes);
+                ?>
                     <tr class="table">
                         <td><?php echo $no ?></td>
                         <td><?php echo $row_pengaduan["nama"] ?></td>
@@ -62,9 +69,12 @@ header("Content-Disposition: attachment; filename=Data Pegawai.xls");
                         <td><?php echo $row_pengaduan["lokasi"] ?></td>
                         <td><?php echo $row_pengaduan["tgl_kerja"] ?></td>
                         <td><?php echo $row_pengaduan["jenis"] ?></td>
+                        <td><?php echo $row_pengaduan["wkt_mulai"] ?></td>
+                        <td><?php echo $row_pengaduan["wkt_akhir"] ?></td>
+                        <td><?php echo $durasiFormatted ?></td>
                         <td><?php echo $row_pengaduan["status"] ?></td>
                         <td><?php echo $row_pengaduan["pekerja"] ?></td>
-                        <td><?php echo $row_pengaduan["wkt_kerja"] ?></td>
+                        <td>
                     </tr>
                 <?php $no++;
                 } ?>

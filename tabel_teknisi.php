@@ -9,7 +9,7 @@ $monthFilter = isset($_POST['month']) ? $_POST['month'] : '';
 $statusFilter = isset($_POST['status']) ? $_POST['status'] : '';
 
 // Tampilkan data dengan filter bulan dan status jika ada
-$query = "SELECT * FROM laporan WHERE 1=1";
+$query = "SELECT *, TIMESTAMPDIFF(MINUTE, wkt_mulai, wkt_akhir) AS durasi_menit FROM laporan WHERE 1=1";
 if ($monthFilter) {
   $query .= " AND MONTH(tanggal) = '$monthFilter'";
 }
@@ -136,6 +136,7 @@ $pengaduan = mysqli_query($conn, $query);
           <th>Jenis Pengaduan</th>
           <th>Mulai Pekerjaan</th>
           <th>Selesai Pekerjaan</th>
+          <th>Durasi (Jam:Menit)</th>
           <th>Status</th>
           <th>Nama Pekerja</th>
           <th>Aksi</th>
@@ -144,7 +145,12 @@ $pengaduan = mysqli_query($conn, $query);
       <tbody>
         <?php if (mysqli_num_rows($pengaduan)) { ?>
           <?php $no = 1 ?>
-          <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) { ?>
+          <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) {
+            $durasiMenit = $row_pengaduan["durasi_menit"];
+            $hours = floor($durasiMenit / 60);
+            $minutes = $durasiMenit % 60;
+            $durasiFormatted = sprintf("%02d:%02d", $hours, $minutes);
+          ?>
             <tr class="table">
               <td><?php echo $no ?></td>
               <td><?php echo $row_pengaduan["nama"] ?></td>
@@ -157,10 +163,18 @@ $pengaduan = mysqli_query($conn, $query);
               <td><?php echo $row_pengaduan["jenis"] ?></td>
               <td><?php echo $row_pengaduan["wkt_mulai"] ?></td>
               <td><?php echo $row_pengaduan["wkt_akhir"] ?></td>
+              <td><?php echo $durasiFormatted ?></td>
               <td><?php echo $row_pengaduan["status"] ?></td>
               <td><?php echo $row_pengaduan["pekerja"] ?></td>
               <td>
-                <a href="updateteknisi.php?update=<?php echo $row_pengaduan["id"] ?>" class="btn btn-primary mb-2">Update</a>
+                <?php
+                // Tampilkan tombol "Update" jika pengaduan belum diperbarui
+                if (!$row_pengaduan["updated"]) {
+                ?>
+                  <a href="updateteknisi.php?update=<?php echo $row_pengaduan["id"] ?>" class="btn btn-primary mb-2">Update</a>
+                <?php
+                }
+                ?>
                 <a href="image/<?php echo $row_pengaduan["image"] ?>" target="_blank" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
               </td>
             </tr>
