@@ -6,6 +6,14 @@ include "config.php";
 $monthFilter = isset($_POST['month']) ? $_POST['month'] : '';
 $statusFilter = isset($_POST['status']) ? $_POST['status'] : '';
 
+// Handle delete all request
+if (isset($_POST['delete_all'])) {
+  $deleteAllQuery = "DELETE FROM laporan";
+  mysqli_query($conn, $deleteAllQuery);
+  header("Location: tabel_admin.php");
+  exit();
+}
+
 // Tampilkan data dengan filter bulan dan status jika ada
 $query = "SELECT *, TIMESTAMPDIFF(MINUTE, wkt_mulai, wkt_akhir) AS durasi_menit FROM laporan WHERE 1=1";
 if ($monthFilter) {
@@ -111,6 +119,7 @@ $pengaduan = mysqli_query($conn, $query);
       <div class="col-md-4 align-self-end">
         <button type="submit" class="btn btn-primary">Filter</button>
         <a href="excel.php?month=<?= $monthFilter ?>&status=<?php echo $statusFilter ?>" class="btn btn-primary">Excel</a>
+        <button type="submit" name="delete_all" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete all records?')">Delete All</button>
       </div>
     </form>
   </div>
