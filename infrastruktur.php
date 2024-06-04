@@ -5,13 +5,14 @@ include "config.php";
 if (isset($_POST["simpan"])) {
   $nama = $_POST["nama"];
   $departemen = $_POST["departemen"];
+  $cabang = $_POST["cabang"];
   $kebutuhan = $_POST["kebutuhan"];
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
   $lokasi = $_POST["lokasi"];
   $status = "Belum dikerjakan"; // Set default status
 
-  $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, kebutuhan, tanggal, penjelasan, lokasi, status) VALUES('$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$lokasi','$status')");
+  $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, cabang, kebutuhan, tanggal, penjelasan, lokasi, status) VALUES('$nama','$departemen','$cabang','$kebutuhan','$tanggal','$penjelasan','$lokasi','$status')");
   if ($simpan) {
     echo "<script>
               alert('Data Anda berhasil disimpan!');
@@ -135,6 +136,14 @@ if (isset($_POST["simpan"])) {
                 <option value="Budget & Control">Budget & Control</option>
                 <option value="Finance & PDCA">Finance & PDCA</option>
                 <option value="Information Technology (IT)">Information Technology (IT)</option>
+              </select>
+            </div>
+            <label for="">Cabang</label>
+            <div class="input-group mb-3">
+              <select class="form-select" aria-label="Default select example" name="cabang" id="kebutuhan">
+                <option value=""></option>
+                <option value="TN-HO">TN-HO</option>
+                <option value="SHN">SHN</option>
               </select>
             </div>
             <label for="">Kebutuhan</label>

@@ -5,6 +5,7 @@ include "config.php";
 if (isset($_POST["simpan"])) {
     $nama = $_POST["nama"];
     $departemen = $_POST["departemen"];
+    $cabang = $_POST["cabang"];
     $kebutuhan = $_POST["kebutuhan"];
     $tanggal = $_POST["tanggal"];
     $penjelasan = $_POST["penjelasan"];
@@ -17,7 +18,7 @@ if (isset($_POST["simpan"])) {
     $wkt_akhir = date("H:i", strtotime($wkt_akhir));
     $status = $_POST["status"];
     $pekerja = $_POST["pekerja"];
-    $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, kebutuhan, tanggal, penjelasan, lokasi,tgl_kerja,jenis, wkt_mulai,wkt_akhir, status,pekerja) VALUES('$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$lokasi','$tgl_kerja','$jenis','$wkt_mulai','$wkt_akhir','$status','$pekerja')");
+    $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, cabang, kebutuhan, tanggal, penjelasan, lokasi,tgl_kerja,jenis, wkt_mulai,wkt_akhir, status,pekerja) VALUES('$nama','$departemen','$cabang','$kebutuhan','$tanggal','$penjelasan','$lokasi','$tgl_kerja','$jenis','$wkt_mulai','$wkt_akhir','$status','$pekerja')");
 
     if ($simpan) {
         echo "<script>
@@ -150,6 +151,14 @@ if (isset($_POST["simpan"])) {
                                 <option value=""></option>
                                 <option value="Repair">Repair</option>
                                 <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <label for="">Cabang</label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" aria-label="Default select example" name="cabang" id="kebutuhan">
+                                <option value=""></option>
+                                <option value="TN-HO">TN-HO</option>
+                                <option value="SHN">SHN</option>
                             </select>
                         </div>
                         <label for="">Tanggal Pengaduan</label>

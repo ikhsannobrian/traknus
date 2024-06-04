@@ -123,6 +123,7 @@ $pengaduan = mysqli_query($conn, $query);
           <th>No.</th>
           <th>Nama</th>
           <th>Departemen</th>
+          <th>Cabang</th>
           <th>Kebutuhan</th>
           <th>Tanggal Pengaduan</th>
           <th>Penjelasan</th>
@@ -150,6 +151,7 @@ $pengaduan = mysqli_query($conn, $query);
               <td><?php echo $no ?></td>
               <td><?php echo $row_pengaduan["nama"] ?></td>
               <td><?php echo $row_pengaduan["departemen"] ?></td>
+              <td><?php echo $row_pengaduan["cabang"] ?></td>
               <td><?php echo $row_pengaduan["kebutuhan"] ?></td>
               <td><?php echo $row_pengaduan["tanggal"] ?></td>
               <td><?php echo $row_pengaduan["penjelasan"] ?></td>
