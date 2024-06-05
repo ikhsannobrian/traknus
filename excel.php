@@ -1,37 +1,47 @@
 <?php
-
-use function PHPSTORM_META\type;
-
 ob_start();
-session_start();
 include "config.php";
 
-// Handle form submission for month filter
+// Mendapatkan filter bulan dan status dari query string
 $monthFilter = isset($_GET['month']) ? $_GET['month'] : '';
 $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
-// Tampilkan data dengan filter bulan dan status jika ada
-$query = "SELECT *, TIMESTAMPDIFF(MINUTE, wkt_mulai, wkt_akhir) AS durasi_menit FROM laporan WHERE 1=1";
+
+// Membuat nama bulan dalam format teks jika bulan dipilih
 if ($monthFilter) {
-    $query .= " AND MONTH(tanggal) = '$monthFilter'";
+    $bulan = date('F', mktime(0, 0, 0, $monthFilter, 10)); // Contoh output: January, February, dst.
+} else {
+    $bulan = 'All_Months'; // Jika tidak ada bulan yang dipilih
 }
+
+// Membuat nama status
 if ($statusFilter) {
-    $query .= " AND status = '$statusFilter'";
+    $status = str_replace(' ', '_', $statusFilter);
+} else {
+    $status = 'All_Status'; // Jika tidak ada status yang dipilih
 }
-$query .= " ORDER BY id DESC";
-$pengaduan = mysqli_query($conn, $query);
 
-?>
-<!-- Start Table -->
+$tahun = date('Y'); // Contoh output: 2024
 
+// Membuat nama file sesuai dengan bulan, tahun, status, dan kata "pengaduan"
+$filename = "pengaduan_" . $bulan . "_" . $status . "_" . $tahun . ".xls";
 
-<?php
+// Menetapkan header untuk mengunduh file Excel
 header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=Data Pegawai.xls");
+header("Content-Disposition: attachment; filename=$filename");
+
+// Konten Excel Anda dapat dimulai dari sini
 ?>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="UTF-8">
+    <title>Data Pengaduan</title>
+</head>
 
-<div class="table-responsive">
-    <table border="1" class="table table-striped mt-2 text-center">
+<body>
+    <!-- Start Table -->
+    <table border="1">
         <thead>
             <tr>
                 <th>No.</th>
@@ -52,39 +62,54 @@ header("Content-Disposition: attachment; filename=Data Pegawai.xls");
             </tr>
         </thead>
         <tbody>
-            <?php if (mysqli_num_rows($pengaduan)) { ?>
-                <?php $no = 1 ?>
-                <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) {
-                    $durasiMenit = $row_pengaduan["durasi_menit"];
+            <?php
+            // Query untuk mendapatkan data berdasarkan filter bulan dan status
+            $query = "SELECT *, TIMESTAMPDIFF(MINUTE, wkt_mulai, wkt_akhir) AS durasi_menit FROM laporan WHERE 1=1";
+            if ($monthFilter) {
+                $query .= " AND MONTH(tanggal) = '$monthFilter'";
+            }
+            if ($statusFilter) {
+                $query .= " AND status = '$statusFilter'";
+            }
+            $query .= " ORDER BY id DESC";
+            $pengaduan = mysqli_query($conn, $query);
+
+            if (mysqli_num_rows($pengaduan) > 0) {
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($pengaduan)) {
+                    $durasiMenit = $row["durasi_menit"];
                     $hours = floor($durasiMenit / 60);
                     $minutes = $durasiMenit % 60;
                     $durasiFormatted = sprintf("%02d:%02d", $hours, $minutes);
-                ?>
-                    <tr class="table">
-                        <td><?php echo $no ?></td>
-                        <td><?php echo $row_pengaduan["nama"] ?></td>
-                        <td><?php echo $row_pengaduan["departemen"] ?></td>
-                        <td><?php echo $row_pengaduan["cabang"] ?></td>
-                        <td><?php echo $row_pengaduan["kebutuhan"] ?></td>
-                        <td><?php echo $row_pengaduan["tanggal"] ?></td>
-                        <td><?php echo $row_pengaduan["penjelasan"] ?></td>
-                        <td><?php echo $row_pengaduan["lokasi"] ?></td>
-                        <td><?php echo $row_pengaduan["tgl_kerja"] ?></td>
-                        <td><?php echo $row_pengaduan["jenis"] ?></td>
-                        <td><?php echo $row_pengaduan["wkt_mulai"] ?></td>
-                        <td><?php echo $row_pengaduan["wkt_akhir"] ?></td>
-                        <td><?php echo $durasiFormatted ?></td>
-                        <td><?php echo $row_pengaduan["status"] ?></td>
-                        <td><?php echo $row_pengaduan["pekerja"] ?></td>
-                        <td>
-                    </tr>
-                <?php $no++;
-                } ?>
-            <?php } ?>
+                    echo "<tr>";
+                    echo "<td>" . $no . "</td>";
+                    echo "<td>" . $row["nama"] . "</td>";
+                    echo "<td>" . $row["departemen"] . "</td>";
+                    echo "<td>" . $row["cabang"] . "</td>";
+                    echo "<td>" . $row["kebutuhan"] . "</td>";
+                    echo "<td>" . $row["tanggal"] . "</td>";
+                    echo "<td>" . $row["penjelasan"] . "</td>";
+                    echo "<td>" . $row["lokasi"] . "</td>";
+                    echo "<td>" . $row["tgl_kerja"] . "</td>";
+                    echo "<td>" . $row["jenis"] . "</td>";
+                    echo "<td>" . $row["wkt_mulai"] . "</td>";
+                    echo "<td>" . $row["wkt_akhir"] . "</td>";
+                    echo "<td>" . $durasiFormatted . "</td>";
+                    echo "<td>" . $row["status"] . "</td>";
+                    echo "<td>" . $row["pekerja"] . "</td>";
+                    echo "</tr>";
+                    $no++;
+                }
+            } else {
+                echo "<tr><td colspan='15'>No records found</td></tr>";
+            }
+            ?>
         </tbody>
     </table>
-</div>
-<!-- End Table -->
+    <!-- End Table -->
+</body>
+
+</html>
 
 <?php
 mysqli_close($conn);
