@@ -189,7 +189,11 @@ function calculateDuration($startTime, $endTime)
                 <?php
                 }
                 ?>
-                <a href="image/<?php echo $row_pengaduan["image"] ?>" target="_blank" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
+                <?php if (!empty($row_pengaduan["image"])) { ?>
+                  <a href="image/<?php echo $row_pengaduan["image"] ?>" target="_blank" class="btn btn-warning"><i class='bx bxs-file-image'></i></a>
+                <?php } else { ?>
+                  <button class="btn btn-warning" disabled><i class='bx bxs-file-image'></i></button>
+                <?php } ?>
               </td>
             </tr>
           <?php $no++;
