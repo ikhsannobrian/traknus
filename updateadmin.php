@@ -146,7 +146,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                         <div class="mb-3">
                             <select class="form-select" aria-label="Default select example" name="status" value="<?php echo $row_edit["status"] ?>">
                                 <option value=""></option>
-                                <option value="Belum dikerjakan" <?php if ($row_edit['status'] == 'Belum dikerjakan') echo 'selected' ?>>Belum dikerjakan</option>
+                                <option value="On-progress" <?php if ($row_edit['status'] == 'On-progress') echo 'selected' ?>>On-progress</option>
                                 <option value="Sudah dikerjakan" <?php if ($row_edit['status'] == 'Sudah dikerjakan') echo 'selected' ?>>Sudah dikerjakan</option>
                             </select>
                         </div>
@@ -164,7 +164,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                     <!-- End Form -->
                     <div class="text-center">
                         <small>Apakah ingin kembali?
-                            <a href="tabel_teknisi.php" class="fw-bold">Table</a></small>
+                            <a href="tabel_admin.php" class="fw-bold">Table</a></small>
                     </div>
                 </div>
             </div>

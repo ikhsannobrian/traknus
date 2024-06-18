@@ -22,6 +22,7 @@ include "config.php";
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <title>General Affair</title>
+  
 </head>
 
 <body>

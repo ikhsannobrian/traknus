@@ -4,15 +4,18 @@ include "config.php";
 /**Input Data**/
 if (isset($_POST["simpan"])) {
   $nama = $_POST["nama"];
+  $email = $_POST["email"];
   $departemen = $_POST["departemen"];
   $cabang = $_POST["cabang"];
   $kebutuhan = $_POST["kebutuhan"];
   $tanggal = $_POST["tanggal"];
   $penjelasan = $_POST["penjelasan"];
   $lokasi = $_POST["lokasi"];
+  $wkt_mulai = "00.00";
+  $wkt_akhir = "00.00";
   $status = "Belum dikerjakan"; // Set default status
 
-  $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, departemen, cabang, kebutuhan, tanggal, penjelasan, lokasi, status) VALUES('$nama','$departemen','$cabang','$kebutuhan','$tanggal','$penjelasan','$lokasi','$status')");
+  $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, email, departemen, cabang, kebutuhan, tanggal, penjelasan, lokasi,wkt_mulai,wkt_akhir, status) VALUES('$nama','$email','$departemen','$cabang','$kebutuhan','$tanggal','$penjelasan','$lokasi',' $wkt_mulai','$wkt_akhir','$status')");
   if ($simpan) {
     echo "<script>
               alert('Data Anda berhasil disimpan!');
@@ -101,6 +104,10 @@ if (isset($_POST["simpan"])) {
             <label for="">Nama</label>
             <div class="input-group mb-3">
               <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" required />
+            </div>
+            <label for="">Email</label>
+            <div class="input-group mb-3">
+              <input type="email" class="form-control form-control-lg fs-6" placeholder="Masukan email kantor anda" name="email" required />
             </div>
             <label for="">Departemen</label>
             <div class="input-group mb-3">

@@ -46,6 +46,7 @@ header("Content-Disposition: attachment; filename=$filename");
             <tr>
                 <th>No.</th>
                 <th>Nama</th>
+                <th>Email</th>
                 <th>Departemen</th>
                 <th>Cabang</th>
                 <th>Kebutuhan</th>
@@ -84,6 +85,7 @@ header("Content-Disposition: attachment; filename=$filename");
                     echo "<tr>";
                     echo "<td>" . $no . "</td>";
                     echo "<td>" . $row["nama"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
                     echo "<td>" . $row["departemen"] . "</td>";
                     echo "<td>" . $row["cabang"] . "</td>";
                     echo "<td>" . $row["kebutuhan"] . "</td>";

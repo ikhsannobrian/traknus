@@ -52,7 +52,6 @@ include "config.php";
       <div class="row pt-5">
         <div class="col-md-12 text-center">
           <h1>Our Features</h1>
-          <p>A Tribute Those Who Served as Executive Secretary and <br> Treasurer for the American Finance Association</p>
         </div>
       </div>
       <div class="row py-4">

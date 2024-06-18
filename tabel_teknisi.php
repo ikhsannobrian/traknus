@@ -9,7 +9,7 @@ $monthFilter = isset($_POST['month']) ? $_POST['month'] : '';
 $statusFilter = isset($_POST['status']) ? $_POST['status'] : '';
 
 // Tampilkan data dengan filter bulan dan status jika ada
-$query = "SELECT *, TIMESTAMPDIFF(MINUTE, wkt_mulai, wkt_akhir) AS durasi_menit FROM laporan WHERE 1=1";
+$query = "SELECT * FROM laporan WHERE 1=1";
 if ($monthFilter) {
   $query .= " AND MONTH(tanggal) = '$monthFilter'";
 }
@@ -18,6 +18,23 @@ if ($statusFilter) {
 }
 $query .= " ORDER BY id DESC";
 $pengaduan = mysqli_query($conn, $query);
+
+function calculateDuration($startTime, $endTime)
+{
+  $startTimestamp = strtotime($startTime);
+  $endTimestamp = strtotime($endTime);
+
+  // Tambahkan satu hari jika waktu akhir lebih kecil dari waktu mulai
+  if ($endTimestamp < $startTimestamp) {
+    $endTimestamp += 24 * 60 * 60; // Tambahkan satu hari dalam detik
+  }
+
+  $durationMinutes = ($endTimestamp - $startTimestamp) / 60;
+  $hours = floor($durationMinutes / 60);
+  $minutes = $durationMinutes % 60;
+
+  return sprintf("%02d:%02d", $hours, $minutes);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,11 +50,9 @@ $pengaduan = mysqli_query($conn, $query);
   <!-- Font Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700&display=swap" rel="stylesheet" />
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
-  <!-- My style -->
-  <link rel="stylesheet" href="" />
   <title>Daftar Pengaduan Teknisi</title>
   <style>
     table {
@@ -63,27 +78,23 @@ $pengaduan = mysqli_query($conn, $query);
 </head>
 
 <body>
-  <!-- Start Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- start navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" /></a>
+      <a class="navbar-brand" href="">
+        <img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" />
+      </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item mx-3">
-            <a class="nav-link" aria-current="page" href="teknisi.php">Form Teknisi</a>
-          </li>
         </ul>
-        <div>
-          <a href="logoutteknisi.php" class="btn btn-primary">Log Out</a>
-        </div>
       </div>
     </div>
   </nav>
-  <!-- End Navbar -->
+  <!-- End navbar -->
   <!-- Start Filter Form -->
   <div class="container mt-4">
     <form method="post" class="row g-3">
@@ -110,12 +121,14 @@ $pengaduan = mysqli_query($conn, $query);
         <select name="status" id="status" class="form-select">
           <option value="">All Status</option>
           <option value="Sudah Dikerjakan" <?php if ($statusFilter == 'Sudah Dikerjakan') echo 'selected'; ?>>Sudah Dikerjakan</option>
-          <option value="Belum Dikerjakan" <?php if ($statusFilter == 'Belum Dikerjakan') echo 'selected'; ?>>Belum Dikerjakan</option>
+          <option value="On-progress" <?php if ($statusFilter == 'On-progress') echo 'selected'; ?>>On-progress</option>
         </select>
       </div>
       <div class="col-md-4 align-self-end">
         <button type="submit" class="btn btn-primary">Filter</button>
         <!-- <a href="excel.php?month=<?= $monthFilter ?>" class="btn btn-primary">Excel</a> -->
+        <a href="teknisi.php" class="btn btn-primary">Form Teknisi</a>
+        <a href="logoutteknisi.php" class="btn btn-danger">Log Out</a>
       </div>
     </form>
   </div>
@@ -127,6 +140,7 @@ $pengaduan = mysqli_query($conn, $query);
         <tr>
           <th>No.</th>
           <th>Nama</th>
+          <th>Email</th>
           <th>Departemen</th>
           <th>Cabang</th>
           <th>Kebutuhan</th>
@@ -147,14 +161,12 @@ $pengaduan = mysqli_query($conn, $query);
         <?php if (mysqli_num_rows($pengaduan)) { ?>
           <?php $no = 1 ?>
           <?php while ($row_pengaduan = mysqli_fetch_array($pengaduan)) {
-            $durasiMenit = $row_pengaduan["durasi_menit"];
-            $hours = floor($durasiMenit / 60);
-            $minutes = $durasiMenit % 60;
-            $durasiFormatted = sprintf("%02d:%02d", $hours, $minutes);
+            $durasiFormatted = calculateDuration($row_pengaduan["wkt_mulai"], $row_pengaduan["wkt_akhir"]);
           ?>
             <tr class="table">
               <td><?php echo $no ?></td>
               <td><?php echo $row_pengaduan["nama"] ?></td>
+              <td><?php echo $row_pengaduan["email"] ?></td>
               <td><?php echo $row_pengaduan["departemen"] ?></td>
               <td><?php echo $row_pengaduan["cabang"] ?></td>
               <td><?php echo $row_pengaduan["kebutuhan"] ?></td>
@@ -187,14 +199,9 @@ $pengaduan = mysqli_query($conn, $query);
     </table>
   </div>
   <!-- End Table -->
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0A7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
 </body>
 
 </html>

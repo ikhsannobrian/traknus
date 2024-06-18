@@ -100,7 +100,7 @@ if (isset($_POST["simpan"])) {
                     </a>
                     <!-- End Logo -->
                     <div class="text-center">
-                        <h3 class="fw-bold">Form Pengaduan</h3>
+                        <h3 class="fw-bold">Form Pengaduan for Technician</h3>
                         <p class="text-secondary">Maintenance & Repair</p>
                     </div>
                     <!-- Start Form -->
