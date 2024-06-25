@@ -1,18 +1,7 @@
 <?php
 ob_start();
 include "config.php";
-/**Input Data
-if (isset($_POST["simpan"])) {
-    $nama = $_POST["nama"];
-    $departemen = $_POST["departemen"];
-    $kebutuhan = $_POST["kebutuhan"];
-    $tanggal = $_POST["tanggal"];
-    $penjelasan = $_POST["penjelasan"];
-    $status = $_POST["status"];
-    // $image = $_POST["image"];
-    mysqli_query($conn, "INSERT INTO pengaduan VALUES('','$nama','$departemen','$kebutuhan','$tanggal','$penjelasan','$status','')");
-}
- **/
+
 /** Proses Update Data **/
 if (isset($_POST["ubah"])) {
     $_id = $_POST["id"];
@@ -90,7 +79,6 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                     <li class="nav-item mx-2">
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -101,15 +89,14 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
             <div class="row align-items-center justify-content-center h-100 g-0 px-4 px-sm-0">
                 <div class="col col-sm-6 col-lg-7 col-xl-6">
                     <!-- Start Logo  -->
-                    <a href="#" class="d-flex justify-content-center mb-4"><img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" />
-                    </a>
+                    <a href="#" class="d-flex justify-content-center mb-4"><img src="image/Traktor Nusantara Logo - Horizontal RGB.png" alt="" width="200" /></a>
                     <!-- End Logo -->
                     <div class="text-center">
                         <h3 class="fw-bold">Form Update Teknisi</h3>
                         <p class="text-secondary">Maintenance & Repair</p>
                     </div>
                     <!-- Start Form -->
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         <label for="">Nama</label>
                         <div class="input-group mb-3">
                             <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama pekerja" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" />
@@ -172,12 +159,22 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
         <!-- End Form -->
         <!-- Option 1: Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            function validateForm() {
+                const forbiddenSymbols = /[!@#$%^&*(),.?":{}|<>]/;
+                const fields = ['pekerja', 'penjelasan']; // Add other fields if needed
 
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+                for (let i = 0; i < fields.length; i++) {
+                    const field = document.getElementsByName(fields[i])[0];
+                    if (forbiddenSymbols.test(field.value)) {
+                        alert('Field ' + fields[i] + ' contains forbidden symbols.');
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
+    </div>
 </body>
 
 </html>

@@ -22,8 +22,36 @@ include "config.php";
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <title>General Affair</title>
-  
+
 </head>
+<style>
+  #hero {
+    background: url("image/gedung traknus.jpg") no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: left;
+    position: relative;
+  }
+
+  .hero-tagline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+  }
+
+  .hero-tagline h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-tagline p {
+    font-size: 1.25rem;
+  }
+</style>
 
 <body>
   <!-- start navbar -->
@@ -58,14 +86,9 @@ include "config.php";
   <!-- Start Hero Section -->
   <section id="hero">
     <div class="container h-100">
-      <div class="row h-100"></div>
-      <div class="col-md-6 hero-tagline">
-        <h1>General Affair</h1>
-        <p>
-          Departemen <span class="fw-bold">General Affair</span> melakukan
-          beberapa hal yaitu repair & maintenance, administrasi & asset,
-          operational expand & housekeeping
-        </p>
+      <div class="row h-100 align-items-center">
+        <div class="col-md-6 hero-tagline">
+        </div>
       </div>
     </div>
   </section>

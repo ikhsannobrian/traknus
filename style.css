@@ -1,43 +1,26 @@
-body {
-  font-family: "Poppins", sans-serif;
-}
-
-.navbar-brand img {
-  width: 200px;
-}
-
 #hero {
-  background: url("image/hero-bg.jpg") no-repeat center center/cover;
+  background: url("image/gedung traknus.jpg") no-repeat center center/cover;
   height: 100vh;
   display: flex;
   align-items: center;
   color: white;
   text-align: left;
+  position: relative;
 }
 
 .hero-tagline {
-  max-width: 600px;
-  padding: 0 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
 }
 
-@media (max-width: 767px) {
-  #hero {
-    text-align: center;
-    background-position: top;
-  }
-
-  .hero-tagline {
-    margin: 0 auto;
-    text-align: center;
-  }
+.hero-tagline h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  #hero {
-    text-align: left;
-  }
-
-  .hero-tagline {
-    text-align: left;
-  }
+.hero-tagline p {
+  font-size: 1.25rem;
 }

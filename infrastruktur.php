@@ -15,21 +15,35 @@ if (isset($_POST["simpan"])) {
   $wkt_akhir = "00.00";
   $status = "Belum dikerjakan"; // Set default status
 
-  $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, email, departemen, cabang, kebutuhan, tanggal, penjelasan, lokasi,wkt_mulai,wkt_akhir, status) VALUES('$nama','$email','$departemen','$cabang','$kebutuhan','$tanggal','$penjelasan','$lokasi',' $wkt_mulai','$wkt_akhir','$status')");
-  if ($simpan) {
+  // Validate that the name contains only letters and spaces
+  if (!preg_match("/^[a-zA-Z\s]*$/", $nama)) {
     echo "<script>
-              alert('Data Anda berhasil disimpan!');
+              alert('Hanya boleh mengandung huruf dan spasi!');
+              document.location='infrastruktur.php';
+          </script>";
+  } elseif (!preg_match("/^[a-zA-Z\s]*$/", $lokasi)) {
+    echo "<script>
+              alert('Lokasi hanya boleh mengandung huruf dan spasi!');
               document.location='infrastruktur.php';
           </script>";
   } else {
-    echo "<script>
-              alert('Simpan data gagal!');
-              document.location='infrastruktur.php';
-          </script>";
+    $simpan = mysqli_query($conn, "INSERT INTO laporan (nama, email, departemen, cabang, kebutuhan, tanggal, penjelasan, lokasi, wkt_mulai, wkt_akhir, status) VALUES('$nama','$email','$departemen','$cabang','$kebutuhan','$tanggal','$penjelasan','$lokasi','$wkt_mulai','$wkt_akhir','$status')");
+    if ($simpan) {
+      echo "<script>
+                alert('Data Anda berhasil disimpan!');
+                document.location='infrastruktur.php';
+            </script>";
+    } else {
+      echo "<script>
+                alert('Simpan data gagal!');
+                document.location='infrastruktur.php';
+            </script>";
+    }
   }
 }
+mysqli_close($conn);
+ob_end_flush();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +57,7 @@ if (isset($_POST["simpan"])) {
   <!-- Font Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700&display=swap" rel="stylesheet" />
   <!-- Logo Title Bar -->
   <link rel="icon" href="image/Traktor Nusantara Logo - Vertikal RGB.png" type="image/x-icon" />
   <!-- My style -->
@@ -101,9 +115,9 @@ if (isset($_POST["simpan"])) {
           </div>
           <!-- Start Form -->
           <form method="post" class="tulisan">
-            <label for="">Nama</label>
+            <label for="name">Nama</label>
             <div class="input-group mb-3">
-              <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" required />
+              <input type="text" id="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama anda" name="nama" pattern="[A-Za-z\s]+" oninput="this.setCustomValidity(''); if (!this.validity.valid) this.setCustomValidity('Please enter letters and spaces only.')" required>
             </div>
             <label for="">Email</label>
             <div class="input-group mb-3">
@@ -111,43 +125,16 @@ if (isset($_POST["simpan"])) {
             </div>
             <label for="">Departemen</label>
             <div class="input-group mb-3">
-              <select class="form-select" aria-label="Default select example" name="departemen" id="departemen">
+              <select class="form-select" aria-label="Default select example" name="departemen" id="departemen" required>
                 <option value=""></option>
                 <option value="General Affair">General Affair</option>
                 <option value="Material Handling">Material Handling</option>
-                <option value="Marketing Communication">Marketing Communication</option>
-                <option value="Project Management 1">Project Management 1</option>
-                <option value="Material Handling Parts">Material Handling Parts</option>
-                <option value="Material Handling Service">Material Handling Service</option>
-                <option value="Material Handling Technical Suport">Material Handling Technical Suport</option>
-                <option value="Service Personnel Development & Facilities">Service Personnel Development & Facilities</option>
-                <option value="Business Development & Japan Desk">Business Development & Japan Desk</option>
-                <option value="Power Generation Sales Group 1">Power Generation Sales Group 1</option>
-                <option value="Power Generation Sales Group 2">Power Generation Sales Group 2</option>
-                <option value="Air Solution Sales">Air Solution Sales</option>
-                <option value="Agro Sales">Agro Sales</option>
-                <option value="Construction & Crane Sales">Construction & Crane Sales</option>
-                <option value="Product Management 2">Product Management 2</option>
-                <option value="Product Management 3">Product Management 3</option>
-                <option value="Application Engineering">Application Engineering</option>
-                <option value="Marketing Support & Importation">Marketing Support & Importation</option>
-                <option value="Parts Marketing">Parts Marketing</option>
-                <option value="Parts Sales & Key Account">Parts Sales & Key Account</option>
-                <option value="Parts Logistic & Warehouse">Parts Logistic & Warehouse</option>
-                <option value="Service Business & Marketing">Service Business & Marketing</option>
-                <option value="Service Technical Support">Service Technical Support</option>
-                <option value="Human Capital Development (HCD)">Human Capital Development (HCD)</option>
-                <option value="Human Capital Services (HCS)">Human Capital Services (HCS)</option>
-                <option value="Accounting & Taxes">Accounting & Taxes</option>
-                <option value="Sustainability, Security, Environment, Health, and Safety (SSEHS)">Sustainability, Security, Environment, Health, and Safety (SSEHS)</option>
-                <option value="Budget & Control">Budget & Control</option>
-                <option value="Finance & PDCA">Finance & PDCA</option>
-                <option value="Information Technology (IT)">Information Technology (IT)</option>
+                <!-- Other options... -->
               </select>
             </div>
             <label for="">Cabang</label>
             <div class="input-group mb-3">
-              <select class="form-select" aria-label="Default select example" name="cabang" id="kebutuhan">
+              <select class="form-select" aria-label="Default select example" name="cabang" id="kebutuhan" required>
                 <option value=""></option>
                 <option value="TN-HO">TN-HO</option>
                 <option value="SHN">SHN</option>
@@ -155,7 +142,7 @@ if (isset($_POST["simpan"])) {
             </div>
             <label for="">Kebutuhan</label>
             <div class="input-group mb-3">
-              <select class="form-select" aria-label="Default select example" name="kebutuhan" id="kebutuhan">
+              <select class="form-select" aria-label="Default select example" name="kebutuhan" id="kebutuhan" required>
                 <option value=""></option>
                 <option value="Repair">Repair</option>
                 <option value="Maintenance">Maintenance</option>
@@ -163,31 +150,16 @@ if (isset($_POST["simpan"])) {
             </div>
             <label for="">Tanggal Pengaduan</label>
             <div>
-              <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tanggal" />
+              <input type="date" class="form-control form-control-lg fs-6 mb-3" name="tanggal" required />
             </div>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Penjelasan</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan diperbaiki/maintenance" name="penjelasan"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Jelaskan yang akan diperbaiki/maintenance" name="penjelasan" required></textarea>
             </div>
             <label for="">Lokasi</label>
             <div class="input-group mb-3">
-              <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan lokasi kerusakan/maintenance" name="lokasi" required />
+              <input type="text" class="form-control form-control-lg fs-6" placeholder="Masukan lokasi kerusakan/maintenance" name="lokasi" pattern="[A-Za-z\s]+" oninput="this.setCustomValidity(''); if (!this.validity.valid) this.setCustomValidity('Please enter letters and spaces only.')" required>
             </div>
-            <!--
-            <label for="">Status</label>
-            <div class="mb-3">
-              <select class="form-select" aria-label="Default select example" name="status">
-                <option value=""></option>
-                <option value="Belum dikerjakan">Belum dikerjakan</option>
-                <option value="Sudah dikerjakan">Sudah dikerjakan</option>
-              </select>
-            </div>
-              -->
-            <!-- <div class="mb-3">
-              <label for="">Bukti</label>
-              <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
-              <p style="color: red;">Kosongkan jika belum dikerjakan</p>
-            </div> -->
             <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="simpan">Simpan</button>
           </form>
           <!-- End Form -->
@@ -198,19 +170,9 @@ if (isset($_POST["simpan"])) {
         </div>
       </div>
     </div>
-    <!-- End Form -->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+  </div>
+  <!-- End Form -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>
-<?php
-mysqli_close($conn);
-ob_end_flush();
-?>

@@ -7,16 +7,20 @@ include "config.php";
 if (isset($_POST["submit"])) {
   $username = $_POST["username"];
   $password = $_POST["password"];
-  $sql_tkn = mysqli_query($conn, "SELECT * FROM teknisi WHERE username='$username' AND password='$password'");
+  $sql_tkn = mysqli_query($conn, "SELECT * FROM teknisi WHERE username='$username'");
 
   if (mysqli_num_rows($sql_tkn) > 0) {
     $row_teknisi = mysqli_fetch_array($sql_tkn);
+    if (password_verify($password, $row_teknisi["password"])) {
     $_SESSION['teknisi_id'] = $row_teknisi["id"];
     $_SESSION['teknisi_username'] = $row_teknisi["username"];
     header("location:tabel_teknisi.php");
   } else {
     header("location:loginteknisi.php?failed");
   }
+} else {
+  header("location:loginteknisi.php?failed");
+}
 }
 ?>
 <!DOCTYPE html>
@@ -115,6 +119,11 @@ if (isset($_POST["submit"])) {
             <i class="bx bxl-google text-danger me-1 fs-6"></i>Login with
             Google
           </button>
+          <?php if (isset($_GET["failed"])) { ?>
+            <div class="alert alert-danger alert-dismissable">
+              <p>Username atau password yang anda masukan salah</p>
+            </div>
+          <?php } ?>
           <!-- End Social Login -->
           <!-- Start Divider -->
           <div class="position-relative">

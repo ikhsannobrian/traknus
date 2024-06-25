@@ -65,7 +65,6 @@ $akun = mysqli_query($conn, "SELECT * FROM admin ORDER BY id DESC");
                 <tr>
                     <th>No.</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -76,7 +75,6 @@ $akun = mysqli_query($conn, "SELECT * FROM admin ORDER BY id DESC");
                         <tr>
                             <td><?php echo $no ?></td>
                             <td><?php echo $row_akun["username"] ?></td>
-                            <td><?php echo $row_akun["password"] ?></td>
                             <td>
                                 <a href="deleteadmin.php?delete=<?php echo $row_akun["id"] ?>" class="btn btn-danger">Delete</a>
                             </td>

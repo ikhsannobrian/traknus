@@ -5,17 +5,27 @@ include "config.php";
 if (isset($_POST["simpan"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $simpan = mysqli_query($conn, "INSERT INTO admin VALUES('','$username','$password')");
-    if ($simpan) {
+
+    // Validasi password tidak mengandung petik satu
+    if (strpos($password, "'") !== false) {
         echo "<script>
-                  alert('akun admin berhasil dibuat!');
+                  alert('Password tidak boleh mengandung petik satu!');
                   document.location='form_admin.php';
               </script>";
     } else {
-        echo "<script>
-                  alert('akun admin gagal dibuat!');
-                  document.location='form_admin.php';
-              </script>";
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $simpan = mysqli_query($conn, "INSERT INTO admin VALUES('','$username','$hashed_password')");
+        if ($simpan) {
+            echo "<script>
+                      alert('Akun admin berhasil dibuat!');
+                      document.location='form_admin.php';
+                  </script>";
+        } else {
+            echo "<script>
+                      alert('Akun admin gagal dibuat!');
+                      document.location='form_admin.php';
+                  </script>";
+        }
     }
 }
 ?>
@@ -70,7 +80,6 @@ if (isset($_POST["simpan"])) {
             </div>
         </div>
     </nav>
-    </div>
     <!-- End Navbar -->
     <!-- Start Form -->
     <div class="row vh-100 g-0">
@@ -86,14 +95,14 @@ if (isset($_POST["simpan"])) {
                         <p class="text-secondary">Admin can create account for handle their tasks</p>
                     </div>
                     <!-- Start Form -->
-                    <form method="post">
+                    <form method="post" onsubmit="return validateForm()">
                         <label for="">Username</label>
                         <div class="input-group mb-3">
                             <input type="name" class="form-control form-control-lg fs-6" placeholder="masukan username anda" name="username" required />
                         </div>
                         <label for="">Password</label>
                         <div class="input-group mb-3">
-                            <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan password anda" name="password" required />
+                            <input type="text" class="form-control form-control-lg fs-6" placeholder="Masukan password anda" name="password" required />
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" name="simpan">
                             Simpan
@@ -102,16 +111,23 @@ if (isset($_POST["simpan"])) {
                 </div>
             </div>
         </div>
-        <!-- End Form -->
+    </div>
+    <!-- End Form -->
 
-        <!-- Option 1: Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+    <!-- JavaScript Validation -->
+    <script>
+        function validateForm() {
+            const password = document.getElementsByName('password')[0].value;
+            if (password.includes("'")) {
+                alert('Password tidak boleh mengandung petik satu!');
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 
 </html>

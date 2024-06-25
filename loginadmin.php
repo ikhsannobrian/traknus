@@ -7,13 +7,20 @@ include "config.php";
 if (isset($_POST["submit"])) {
   $username = $_POST["username"];
   $password = $_POST["password"];
-  $sql_login = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
+  $sql_login = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username'");
+
+//  AND password='$password'
 
   if (mysqli_num_rows($sql_login) > 0) {
     $row_admin = mysqli_fetch_array($sql_login);
-    $_SESSION['admin_id'] = $row_admin["id"];
-    $_SESSION['admin_username'] = $row_admin["username"];
-    header("location:halamanadmin.php");
+    // Verify the password
+    if (password_verify($password, $row_admin["password"])) {
+      $_SESSION['admin_id'] = $row_admin["id"];
+      $_SESSION['admin_username'] = $row_admin["username"];
+      header("location:halamanadmin.php");
+    } else {
+      header("location:loginadmin.php?failed");
+    }
   } else {
     header("location:loginadmin.php?failed");
   }

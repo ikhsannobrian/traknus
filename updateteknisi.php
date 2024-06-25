@@ -93,7 +93,7 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
                         <p class="text-secondary">Maintenance & Repair</p>
                     </div>
                     <!-- Start Form -->
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         <label for="">Nama</label>
                         <div class="input-group mb-3">
                             <input type="name" class="form-control form-control-lg fs-6" placeholder="Masukan nama pekerja" name="pekerja" value="<?php echo $row_edit["pekerja"] ?>" />
@@ -160,6 +160,21 @@ $pengaduan = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC");
         <!-- End Form -->
         <!-- Option 1: Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            function validateForm() {
+                const forbiddenSymbols = /[!@#$%^&*(),.?":{}|<>]/;
+                const fields = ['pekerja', 'penjelasan']; // Add other fields if needed
+
+                for (let i = 0; i < fields.length; i++) {
+                    const field = document.getElementsByName(fields[i])[0];
+                    if (forbiddenSymbols.test(field.value)) {
+                        alert('Field ' + fields[i] + ' contains forbidden symbols.');
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
     </div>
 </body>
 
