@@ -128,7 +128,10 @@ ob_end_flush();
               <select class="form-select" aria-label="Default select example" name="departemen" id="departemen" required>
                 <option value=""></option>
                 <option value="General Affair">General Affair</option>
-                <option value="Material Handling">Material Handling</option>
+                <option value="Material Handling Parts">Material Handling Parts</option>
+                <option value="Product Management 1">Product Management 1</option>
+                <option value="Material Handling Service">Material Handling Service</option>
+                <option value="Material Handling Technical Support">Material Handling Technical Support</option>
                 <!-- Other options... -->
               </select>
             </div>
